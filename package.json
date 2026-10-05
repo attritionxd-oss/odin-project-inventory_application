@@ -1,0 +1,63 @@
+{
+  "name": "odin-project-inventory_application",
+  "version": "1.0.0",
+  "description": "An inventory management app for an imaginary store.",
+  "keywords": [
+    "backend",
+    "nodejs",
+    "express",
+    "ejs",
+    "postgres",
+    "odin"
+  ],
+  "license": "ISC",
+  "author": "attritionxd-oss",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "node --env-file=.env --watch ./src/server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run format:check",
+    "test": "jest --watch --testPathIgnorePatterns=\"src/models/(core|sku_level)\"",
+    "test:all": "jest --runInBand --watch",
+    "test:db": "jest --runInBand --watch --testPathPatterns=\"src/models\"",
+    "test:db:core": "jest --runInBand --watch --testPathPatterns=\"src/models/core\"",
+    "test:db:sku": "jest --runInBand --watch --testPathPatterns=\"src/models/sku_level\""
+  },
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "pg": "^8.23.1",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.6",
+    "@babel/preset-env": "^8.0.6",
+    "@eslint/js": "^10.0.1",
+    "babel-jest": "^30.5.2",
+    "dotenv": "^18.0.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-node": "^11.1.0",
+    "globals": "^17.12.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.9.9",
+    "prettier-plugin-ejs": "^1.0.3",
+    "prettier-plugin-sql": "^0.20.0"
+  },
+  "imports": {
+    "#*": "./src/*",
+    "#controllers/*": "./src/controllers/*",
+    "#middleware/*": "./src/middleware/*",
+    "#routes/*": "./src/routes/*",
+    "#services/*": "./src/services/*",
+    "#models/*": "./src/models/*",
+    "#utils/*": "./src/utils/*",
+    "#tests/*": "./tests/*"
+  }
+}
