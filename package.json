@@ -26,7 +26,8 @@
     "test:all": "jest --runInBand --watch",
     "test:db": "jest --runInBand --watch --testPathPatterns=\"src/models\"",
     "test:db:core": "jest --runInBand --watch --testPathPatterns=\"src/models/core\"",
-    "test:db:sku": "jest --runInBand --watch --testPathPatterns=\"src/models/sku_level\""
+    "test:db:sku": "jest --runInBand --watch --testPathPatterns=\"src/models/sku_level\"",
+    "seed-db": "node --env-file=.env src/models/schema.seed.js"
   },
   "dependencies": {
     "ejs": "^6.0.1",
