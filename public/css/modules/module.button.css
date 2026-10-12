@@ -12,7 +12,7 @@
   word-break: keep-all;
 
   background-color: var(--color-mono-600);
-  color: var(--color-mono-100);
+  color: var(--text-h);
 
   transition: all 0.15s ease-in-out;
   line-height: 1.25;
