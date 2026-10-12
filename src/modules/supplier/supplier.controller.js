@@ -60,10 +60,17 @@ const supplierController = {
 
   show: async (req, res, next) => {
     try {
-      const supplier = await supplierService.getById(req.params.id);
+      const id = req.params[0];
+      if (!id) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+
+      const supplier = await supplierService.getById(id);
 
       if (!supplier) {
-        const error = new Error(`Supplier #${req.params.id} was not found.`);
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
         error.statusCode = 404;
         return next(error);
       }
@@ -117,10 +124,17 @@ const supplierController = {
 
   editForm: async (req, res, next) => {
     try {
-      const supplier = await supplierService.getById(req.params.id);
+      const id = req.params[0];
+      if (!id) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+
+      const supplier = await supplierService.getById(id);
 
       if (!supplier) {
-        const error = new Error(`Supplier #${req.params.id} was not found.`);
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
         error.statusCode = 404;
         return next(error);
       }
@@ -142,8 +156,14 @@ const supplierController = {
 
   update: async (req, res, next) => {
     try {
+      const id = req.params[0];
+      if (!id) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+
       const { supplier_name, contact_email } = req.body;
-      const { id } = req.params;
 
       if (!supplier_name || !supplier_name.trim()) {
         return renderWithLayout(res, "suppliers/edit", {
@@ -166,7 +186,7 @@ const supplierController = {
         return next(error);
       }
 
-      res.redirect(`/suppliers/${updatedSupplier.id}/edit`);
+      res.redirect(`/suppliers`);
     } catch (error) {
       next(error);
     }
@@ -174,7 +194,13 @@ const supplierController = {
 
   delete: async (req, res, next) => {
     try {
-      const { id } = req.params;
+      const id = req.params[0];
+      if (!id) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+
       const deletedSupplier = await supplierService.softDelete(id);
 
       if (!deletedSupplier) {
@@ -191,7 +217,13 @@ const supplierController = {
 
   restore: async (req, res, next) => {
     try {
-      const { id } = req.params;
+      const id = req.params[0];
+      if (!id) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
+
       const deletedSupplier = await supplierService.restore(id);
 
       if (!deletedSupplier) {

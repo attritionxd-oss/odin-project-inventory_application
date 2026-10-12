@@ -14,23 +14,28 @@ router.get(
 
 router.post("/", requireRole("SPECIALIST", "ADMIN"), supplierController.create);
 
-router.get("/:id", supplierController.show); // todo: remove this, use edit form directly, but disable editing for unauthorized
+router.get(/^\/(\d+)$/, supplierController.show);
 
 router.get(
-  "/:id/edit",
+  /^\/(\d+)\/edit$/,
   requireRole("SPECIALIST", "ADMIN"),
   supplierController.editForm,
 );
 
 router.post(
-  "/:id",
+  /^\/(\d+)$/,
   requireRole("SPECIALIST", "ADMIN"),
   supplierController.update,
 );
 
-router.post("/:id/delete", requireRole("ADMIN"), supplierController.delete);
 router.post(
-  "/:id/restore",
+  /^\/(\d+)\/delete$/,
+  requireRole("ADMIN"),
+  supplierController.delete,
+);
+
+router.post(
+  /^\/(\d+)\/restore$/,
   requireRole("ANALYST", "ADMIN"),
   supplierController.restore,
 );
