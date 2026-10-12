@@ -26,6 +26,7 @@
   font-weight: 500;
   border-radius: 0.6rem;
   border: 1px solid transparent;
+  outline: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
   word-break: keep-all;
@@ -56,7 +57,7 @@
 }
 
 .btn-primary:hover {
-  background-color: var(--color-action-hover);
+  background-color: var(--color-blue-200);
 }
 
 .btn-outline {
@@ -66,7 +67,9 @@
 
 .btn-outline:hover {
   background-color: var(--color-blue-100);
-  border-color: var(--color-action-hover);
+  border-color: transparent;
+  outline-color: var(--color-blue-200);
+  outline-offset: 2px;
 }
 
 .btn-action-go {
