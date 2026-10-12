@@ -1,5 +1,5 @@
 import app from "#app.js";
-import { initDb, closeDb } from "#shared/db/pool.js";
+import { initDb, closeDb } from "#models/pool.js";
 
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || 3000;

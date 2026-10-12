@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> | Inventory System</title>
+    <style>
+      #root {
+        color: #9ca3af;
+        background-color: #14171d;
+      }
+    </style>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <script type="module" src="/script.js"></script>
+  </head>
+  <body id="root">
+    <%- include("../partials/header") %> <%- include("../partials/navlinks") %>
+    <main class="main__main-wrapper"><%- body %></main>
+  </body>
+</html>

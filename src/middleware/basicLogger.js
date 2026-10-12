@@ -1,4 +1,4 @@
-import { ASSET_REGEX } from "#shared/utils/asset-regex.js";
+import { ASSET_REGEX } from "#utils/asset-regex.js";
 
 const basicLogger = (req, res, next) => {
   if (ASSET_REGEX.test(req.path)) {

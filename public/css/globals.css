@@ -1,0 +1,122 @@
+:root {
+  /* ==========================================================================
+     MONOCHROME & SURFACES (Elevations & Typography)
+     ========================================================================== */
+  /* Base Surfaces (Dark to Light Elevation) */
+  --color-mono-950: #0d0f12; /* Canvas / Deepest background */
+  --color-mono-900: #14171d; /* Base surface / Card background */
+  --color-mono-800: #1f242d; /* Elevated surface / Popovers, modals */
+  --color-mono-700: #2a303c; /* Subdued surface / Borders, dividers */
+  --color-mono-600: #3c4453; /* Muted surface / Input background, disabled borders */
+
+  /* Text & Foreground */
+  --color-mono-400: #6b7280; /* Disabled / Secondary subtle text */
+  --color-mono-300: #9ca3af; /* Muted text / Captions, placeholders */
+  --color-mono-200: #d1d5db; /* Body text / Secondary content */
+  --color-mono-100: #f3f4f6; /* High-contrast text / Headings */
+  --color-mono-50: #ffffff; /* Accent text / Maximum contrast */
+
+  /* ==========================================================================
+     ACCENTS & TONAL PALETTES (Desaturated for Dark Backgrounds)
+     ========================================================================== */
+  /* Blue (Primary Brand / Links) */
+  --color-blue-50: hsl(224, 30%, 20%);
+  --color-blue-100: #1e3a8a; /* Subtle background / Badges */
+  --color-blue-200: #2563eb; /* Border / Secondary interactive */
+  --color-blue-300: #60a5fa; /* Primary Action / Focus rings */
+  --color-blue-400: #93c5fd; /* Hover state on primary */
+
+  /* Purple (Secondary Brand / Special States) */
+  --color-purple-100: #3b0764;
+  --color-purple-200: #7e22ce;
+  --color-purple-300: #c084fc;
+  --color-purple-400: #e9d5ff;
+
+  /* Teal / Cyan (Secondary Accents / Data Visualization) */
+  --color-teal-100: #042f2e;
+  --color-teal-200: #0f766e;
+  --color-teal-300: #2dd4bf;
+  --color-teal-400: #99f6e4;
+
+  /* Red (Destructive / Danger / Warm Accents) */
+  --color-red-100: #450a0a; /* Darkest fill / Subtle alert bg */
+  --color-red-200: #991b1b; /* Strong border / Dark badge outline */
+  --color-red-250: hsl(0, 70%, 45%);
+  --color-red-300: #f87171; /* Primary red text / Icon accent */
+  --color-red-400: #fca5a5; /* High-contrast text / Hover highlight */
+
+  /* Yellow / Amber (Warning / Caution / Warm Highlights) */
+  --color-yellow-100: #451a03; /* Darkest fill / Subtle caution bg */
+  --color-yellow-200: #92400e; /* Strong border / Subtle alert ring */
+  --color-yellow-300: #fbbf24; /* Primary yellow text / Warning icons */
+  --color-yellow-400: #fde68a; /* High-contrast text / Active highlights */
+
+  /* Green / Emerald (Success / Positive / Growth) */
+  --color-green-100: #022c22; /* Darkest fill / Subtle success bg */
+  --color-green-200: #065f46; /* Strong border / Success outline */
+  --color-green-300: #34d399; /* Primary green text / Positive badges */
+  --color-green-400: #a7f3d0; /* High-contrast text / Hover state */
+
+  /* ==========================================================================
+     SEMANTIC MAPPINGS (Driven by Tonal Palettes)
+     ========================================================================== */
+  /* Action / Primary Brand Interactive */
+  --color-action-bg: var(--color-blue-300);
+  --color-action-hover: var(--color-blue-400);
+  --color-action-active: var(--color-blue-200);
+  --color-action-text: var(--color-mono-950);
+
+  /* Alert / Warning */
+  --color-alert-subtle: var(--color-yellow-100);
+  --color-alert-border: var(--color-yellow-200);
+  --color-alert-main: var(--color-yellow-300);
+  --color-alert-text: var(--color-yellow-400);
+
+  /* Stop / Danger / Error */
+  --color-stop-subtle: var(--color-red-100);
+  --color-stop-border: var(--color-red-200);
+  --color-stop-main: var(--color-red-250);
+  --color-stop-hover: var(--color-red-400);
+  --color-stop-text: var(--color-mono-50);
+
+  /* Success / Go */
+  --color-success-subtle: var(--color-green-100);
+  --color-success-hover: var(--color-green-400);
+  --color-success-border: var(--color-green-200);
+  --color-success-main: var(--color-green-300);
+  --color-success-text: var(--color-mono-950);
+  /* --color-success-text: var(--color-green-400); */
+
+  /* Info / Neutral Notice */
+  --color-info-subtle: #0c2340;
+  --color-info-border: var(--color-blue-100);
+  --color-info-main: var(--color-blue-300);
+  --color-info-text: #dbeafe;
+
+  /* ==========================================================================
+     OVERLAYS & SHADOWS
+     ========================================================================== */
+  --color-overlay-backdrop: rgba(0, 0, 0, 0.75);
+  --color-focus-ring: rgba(96, 165, 250, 0.4);
+
+  --font-family-sans:
+    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-family-sans);
+  --font-monospace-default:
+    ui-monospace, SFMono-Regular, "Cascadia Mono", "Roboto Mono",
+    "DejaVu Sans Mono", "Liberation Mono", Menlo, Monaco, "Consolas",
+    "Source Code Pro", monospace;
+  font-size: 62.5%;
+  --font-size: 1.4rem;
+  --standard-gap: 1rem;
+  --border-radius: 1rem;
+  --checkbox-transition: all 0.4s;
+  --header-height: 4rem;
+  --panel-width: 20ch;
+  --panel-visibility-toggle: 700px;
+  --icon-dimensions: 2rem;
+  --icon-color: #181616;
+  --footer-height: 4rem;
+  --form-group-gap: 1.5rem;
+}

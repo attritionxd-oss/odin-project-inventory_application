@@ -1,0 +1,73 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title">Suppliers</h1>
+    <div class="actions-group">
+      <a href="/suppliers" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <tbody>
+        <tr>
+          <td>ID</td>
+          <td><%= supplier.id %></td>
+        </tr>
+        <tr>
+          <td>Supplier name</td>
+          <td><%= supplier.supplier_name %></td>
+        </tr>
+        <tr>
+          <td>Contact email</td>
+          <td><%= supplier.contact_email %></td>
+        </tr>
+        <tr>
+          <td>Created</td>
+          <td><%= supplier.created_at__formatted %></td>
+        </tr>
+        <tr>
+          <td>Deleted</td>
+          <td><%= supplier.deleted_at__formatted %></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="action-group">
+              <a
+                href="/suppliers/<%= supplier.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
+              <% if (currentUser.role === "ADMIN" || currentUser.role ===
+              "ANALYST") { %>
+              <% if (supplier.deleted_at === null) { %>
+              <form
+                action="/suppliers/<%= supplier.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+              <% if (supplier.deleted_at !== null) { %>
+              <form
+                action="/suppliers/<%= supplier.id %>/restore"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-outline">
+                  Restore
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

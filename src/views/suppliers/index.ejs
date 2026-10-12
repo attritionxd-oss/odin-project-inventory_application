@@ -1,0 +1,96 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title">Suppliers</h1>
+    <a href="/suppliers/new" class="btn btn-primary">Add Supplier</a>
+    <% const foo = "bar"; %>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-id">ID</th>
+          <th class="text-left">Name</th>
+          <th class="text-left">Contact</th>
+          <th class="text-left">Created</th>
+          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+          <th class="text-left">Deleted</th>
+          <% } %>
+          <th class="col-actions">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (suppliers && suppliers.length > 0) { %> <%
+        suppliers.forEach((supplier) => { %>
+        <tr>
+          <td class="col-id">
+            <a href="/suppliers/<%= supplier.id %>" class="table-link"
+              ><%= supplier.id %></a
+            >
+          </td>
+          <td class="text-left"><%= supplier.supplier_name %></td>
+          <td class="text-left"><%= supplier.contact_email %></td>
+          <td class="text-left">
+            <time
+              datetime="<%= supplier.created_at__formatted %>"
+              title="<%= supplier.created_at %>"
+              ><%= supplier.created_at__formatted %></time
+            >
+          </td>
+          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+          <td class="text-left">
+            <time
+              datetime="<%= supplier.deleted_at__formatted %>"
+              title="<%= supplier.deleted_at %>"
+              ><%= supplier.deleted_at__formatted %></time
+            >
+          </td>
+          <% } %>
+          <td class="col-actions">
+            <div class="actions-group">
+              <a
+                href="/suppliers/<%= supplier.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
+              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+              <% if (supplier.deleted_at === null) { %>
+              <form
+                action="/suppliers/<%= supplier.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+              <% if (supplier.deleted_at !== null) { %>
+              <form
+                action="/suppliers/<%= supplier.id %>/restore"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-outline">
+                  Restore
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+            </div>
+          </td>
+        </tr>
+        <% }); %>
+        <% } else { %>
+        <tr>
+          <td colspan="5" class="text-center empty-state">
+            No suppliers found.
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

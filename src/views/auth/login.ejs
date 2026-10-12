@@ -1,0 +1,60 @@
+<div class="login__auth-card">
+  <h2>Sign In</h2>
+  <p>Please enter your credentials to access the inventory system</p>
+
+  <% if (error) { %>
+  <div class="alert alert-danger" role="alert"><%= error %></div>
+  <% } %>
+
+  <form action="/login" method="post" class="login__form">
+    <input type="hidden" name="redirectTo" value="<%= redirectTo %>" />
+
+    <div class="login__form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+        placeholder="e.g., encoder@inventory.local"
+        required="true"
+        autofocus="true"
+      />
+    </div>
+
+    <div class="login__form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="form-control"
+        placeholder="••••••••"
+        required="true"
+      />
+    </div>
+
+    <button type="submit" class="login__login-btn">Sign In</button>
+  </form>
+
+  <% if(process.env.ENABLE_MOCK_AUTH === "true") { %>
+  <div class="login__mock-credentials-box">
+    <p>Development Quick Login Credentials:</p>
+    <ul class="login__credentials-list">
+      <li class="login__credentials-item">
+        <span class="login__credentials-item-span"
+          >Username:
+          <span
+            ><code>encoder@inventory.local</code> &nbsp;(Role: ENCODER)</span
+          ></span
+        >
+      </li>
+      <li class="login__credentials-item">
+        <span class="login__credentials-item-span"
+          >Password:<code>1234</code></span
+        >
+      </li>
+    </ul>
+  </div>
+  <% } %>
+</div>

@@ -1,0 +1,24 @@
+<header class="header__app-header">
+  <div class="header__nav-brand">
+    <%- include("../partials/icon-menu") %>
+    <a href="/">
+      <h1>Inventory Manager</h1>
+    </a>
+  </div>
+
+  <div class="header__user-menu">
+    <% if (isAuthenticated) { %>
+    <span class="header__user-info">
+      <span class="header__user-name"><%= currentUser.full_name %></span>
+      <span class="header__badge badge-<%= currentUser.role.toLowerCase() %>"
+        ><%= currentUser.role %></span
+      >
+    </span>
+    <form action="/logout" method="post" style="display: inline">
+      <button type="submit" class="header__btn">Logout</button>
+    </form>
+    <% } else { %>
+    <a href="/login" class="header__btn">Sign In</a>
+    <% } %>
+  </div>
+</header>

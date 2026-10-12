@@ -1,4 +1,4 @@
-import { ASSET_REGEX } from "#shared/utils/asset-regex.js";
+import { ASSET_REGEX } from "#utils/asset-regex.js";
 
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_IP_REQUESTS = 100;
@@ -31,7 +31,7 @@ export default function ipRateLimiter(req, res, next) {
   }
 
   if (record.count >= MAX_IP_REQUESTS) {
-    return res.status(429).render("layouts/error-layout", {
+    return res.status(429).render("errors/429", {
       title: "429 Too Many Requests",
       message: "Too many requests. Please try again later.",
     });

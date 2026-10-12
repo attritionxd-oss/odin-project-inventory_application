@@ -1,0 +1,109 @@
+#login-root {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 375px;
+  min-height: 100vh;
+  position: relative;
+}
+
+#login-main {
+  height: calc(100vh - var(--header-height));
+
+  justify-content: center;
+}
+
+.login__auth-card {
+  align-self: center;
+  max-width: 450px;
+  min-width: 250px;
+  background-color: var(--color-mono-950);
+  padding: calc(var(--standard-gap) * 2.5);
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--standard-gap) * 2);
+}
+
+.login__auth-card h2 {
+  font-size: 1.8rem;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--standard-gap) * 2);
+}
+
+.login__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--standard-gap) * 0.5);
+}
+
+.login__form-group input {
+  height: 4rem;
+  border: 1px solid var(--text);
+  /* border-radius: 0.5rem; */
+  padding: 0 var(--standard-gap);
+}
+
+.login__form-group input:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.login__login-btn {
+  height: 4rem;
+  border: none;
+  background-color: var(--color-action-active);
+}
+
+.login__login-btn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.login__mock-credentials-box {
+  background-color: var(--color-mono-800);
+  padding: var(--standard-gap);
+}
+
+.login__mock-credentials-box p {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.login__mock-credentials-box span,
+.login__mock-credentials-box code,
+.login__mock-credentials-box p {
+  font-size: 1.2rem;
+}
+
+.login__mock-credentials-box code {
+  display: inline-block;
+  color: var(--color-blue-200);
+  padding: 0rem 0.6rem;
+  border-radius: 0.4rem;
+  letter-spacing: 0.2rem;
+  background-color: var(--color-mono-800);
+  width: fit-content;
+}
+
+.login__credentials-list {
+  list-style-type: disc;
+  padding-left: calc(var(--standard-gap) * 2);
+}
+
+.login__credentials-item-span {
+  display: grid;
+  grid-template-columns: 12ch 1fr;
+}
+
+@media (width <= 600px) {
+  .login__credentials-item-span {
+    display: flex;
+    column-gap: var(--standard-gap);
+    flex-wrap: wrap;
+  }
+}

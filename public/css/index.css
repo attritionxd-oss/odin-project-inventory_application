@@ -1,0 +1,101 @@
+@import url("/css/globals.css");
+@import url("/css/partials/header.css");
+@import url("/css/partials/navlinks.css");
+@import url("/css/partials/login.css");
+@import url("/css/modules/module.index.css");
+
+* {
+  box-sizing: border-box;
+  font-size: var(--font-size);
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --text: var(--color-mono-300);
+  --text-h: var(--color-mono-100);
+  --bg: var(--color-mono-950);
+  --card-bg: hsl(231, 14%, 15%);
+  --card-bg2: hsl(231, 14%, 15%);
+  --header-bg: var(--color-purple-900);
+  --footer-bg: var(--color-mono-200);
+  --border: #2e303a;
+  --card-border: #6f7a90;
+  --text-action-green: #01c17a;
+  --code-bg: #1f2028;
+  --accent: var(--color-purple-400);
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --accent-red: var(--color-alert-red);
+  --accent-yellow: var(--color-vivid-apricot);
+  --action-yellow: var(--color-yellow-200);
+  --action-blue: var(--color-action-blue);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: var(--action-blue);
+  text-decoration: none;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: minmax(8ch, var(--panel-width)) 1fr;
+  grid-template-rows: minmax(0px, var(--header-height)) minmax(0px, 1fr);
+  grid-template-areas:
+    "header header"
+    "nav main";
+  min-width: 375px;
+  max-width: 1200px;
+  min-height: 100vh;
+  position: relative;
+  margin: 0 auto;
+}
+
+.main__main-wrapper {
+  grid-area: main;
+  padding: var(--standard-gap);
+  display: flex;
+  flex-direction: column;
+}
+
+.error__error-container {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.error__error-badge {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--color-stop-main);
+}
+
+.error__text-muted {
+  max-width: 500px;
+  margin: var(--standard-gap) auto;
+}
+
+/* panel-visibility-toggle */
+@media (width <= 700px) {
+  #root {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header header"
+      "main main";
+  }
+}
