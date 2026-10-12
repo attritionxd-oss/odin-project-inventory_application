@@ -166,7 +166,7 @@ const supplierController = {
         return next(error);
       }
 
-      res.redirect(`/suppliers/${updatedSupplier.id}`);
+      res.redirect(`/suppliers/${updatedSupplier.id}/edit`);
     } catch (error) {
       next(error);
     }
