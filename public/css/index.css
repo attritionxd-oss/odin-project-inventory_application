@@ -3,6 +3,7 @@
 @import url("/css/partials/navlinks.css");
 @import url("/css/partials/login.css");
 @import url("/css/modules/module.index.css");
+@import url("/css/modules/module.button.css");
 
 * {
   box-sizing: border-box;
