@@ -9,7 +9,27 @@ const supplierController = {
         res.locals?.currentUser.role === "ADMIN" ||
         res.locals?.currentUser.role === "ANALYST";
 
-      const suppliers = await supplierService.getAll({ includeDeleted });
+      const allowedSortFields = {
+        id: "id",
+        name: "supplier_name",
+        contact: "contact_email",
+        created: "created_at",
+        deleted: "deleted_at",
+      };
+
+      const sortQuery = req.query.sort;
+      const orderQuery = req.query.order?.toLowerCase();
+
+      const currentSort = allowedSortFields[sortQuery] ? sortQuery : "name";
+      const orderByField = allowedSortFields[currentSort];
+      const isOrderAscBool = orderQuery === "desc" ? false : true;
+
+      const suppliers = await supplierService.getAll({
+        includeDeleted,
+        orderByField,
+        isOrderAscBool,
+      });
+
       const suppliersWithFormatting = suppliers.map((supplier) => {
         return {
           ...supplier,
@@ -20,9 +40,18 @@ const supplierController = {
         };
       });
 
+      const getSortUrl = (columnKey) => {
+        const isCurrentColumn = currentSort === columnKey;
+        const nextOrder = isCurrentColumn && isOrderAscBool ? "desc" : "asc";
+        return `?sort=${columnKey}&order=${nextOrder}`;
+      };
+
       renderWithLayout(res, "suppliers/index", {
         title: "Suppliers Directory",
         suppliers: suppliersWithFormatting,
+        currentSort,
+        currentOrder: isOrderAscBool ? "asc" : "desc",
+        getSortUrl,
       });
     } catch (error) {
       next(error);

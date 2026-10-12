@@ -113,9 +113,39 @@
 .data-table th {
   background-color: var(--color-mono-900);
   font-weight: 600;
-  color: var(--text-h);
   text-transform: uppercase;
   letter-spacing: 0.05rem;
+}
+
+.data-table th a.sort-link {
+  color: var(--text-h);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.data-table th.col-id a.sort-link {
+  justify-content: center;
+}
+
+.sort-icon {
+  font-size: calc(var(--font-size) * 0.75);
+  color: var(--text);
+  transition: color 0.15s ease-in-out;
+}
+
+.sort-link:hover .sort-icon,
+.sort-link.active .sort-icon {
+  font-size: calc(var(--font-size) * 0.65);
+  color: var(--color-blue-300);
+}
+
+.sort-link.active {
+  /* !todo: needs correction? `.data-table th a.sort-link` overrides this */
+  color: var(--text-h);
+  font-weight: 700;
 }
 
 .data-table tbody tr {
@@ -136,7 +166,7 @@
 
 .col-id {
   text-align: center;
-  width: clamp(3ch, 6ch, 10ch);
+  width: clamp(4ch, 7ch, 10ch);
 }
 
 .col-actions {

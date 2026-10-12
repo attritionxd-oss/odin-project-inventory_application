@@ -9,12 +9,57 @@
     <table class="data-table">
       <thead>
         <tr>
-          <th class="col-id">ID</th>
-          <th class="text-left">Name</th>
-          <th class="text-left">Contact</th>
-          <th class="text-left">Created</th>
+          <th class="col-id">
+            <a
+              href="<%= getSortUrl('id') %>"
+              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>"
+              >ID<span class="sort-icon"
+                ><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('name') %>"
+              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>"
+              >Name<span class="sort-icon"
+                ><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('contact') %>"
+              class="sort-link <%= currentSort === 'contact' ? 'active' : '' %>"
+              >Contact<span class="sort-icon"
+                ><%= currentSort === 'contact' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('created') %>"
+              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>"
+              >Created<span class="sort-icon"
+                ><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
           <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
-          <th class="text-left">Deleted</th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('deleted') %>"
+              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>"
+              >Deleted<span class="sort-icon"
+                ><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
           <% } %>
           <th class="col-actions">Action</th>
         </tr>
