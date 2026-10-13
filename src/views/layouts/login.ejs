@@ -20,10 +20,6 @@
         <h2>Sign In</h2>
         <p>Please enter your credentials to access the inventory system</p>
 
-        <% if (error) { %>
-        <div class="alert alert-danger" role="alert"><%= error %></div>
-        <% } %>
-
         <form action="/login" method="post" class="login__form">
           <input type="hidden" name="redirectTo" value="<%= redirectTo %>" />
 
@@ -54,6 +50,10 @@
 
           <button type="submit" class="login__login-btn">Sign In</button>
         </form>
+
+        <% if (error) { %>
+        <div class="login__error" role="alert"><%= error %></div>
+        <% } %>
 
         <% if(process.env.ENABLE_MOCK_AUTH === "true") { %>
         <div class="login__mock-credentials-box">

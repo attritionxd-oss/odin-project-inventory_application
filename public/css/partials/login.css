@@ -29,6 +29,11 @@
   font-size: 1.8rem;
 }
 
+.login__error {
+  color: var(--color-stop-main);
+  text-align: center;
+}
+
 .login__form {
   display: flex;
   flex-direction: column;

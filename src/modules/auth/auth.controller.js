@@ -1,5 +1,4 @@
 import { userService } from "#modules/users/user.service.js";
-import { renderWithLayout } from "#utils/renderHelper.js";
 
 export const authController = {
   showLoginForm(req, res) {
