@@ -40,12 +40,19 @@
   background-color: var(--color-blue-200);
 }
 
+.btn-primary:focus-visible {
+  background-color: var(--color-blue-200);
+  outline-color: var(--color-blue-200);
+  outline-offset: 2px;
+}
+
 .btn-outline {
   background-color: transparent;
   border-color: var(--color-blue-200);
 }
 
-.btn-outline:hover {
+.btn-outline:hover,
+.btn-outline:focus-visible {
   background-color: var(--color-blue-100);
   border-color: transparent;
   outline-color: var(--color-blue-200);
@@ -61,12 +68,18 @@
   background-color: var(--color-success-hover);
 }
 
+.btn-action-go:focus-visible {
+  outline-color: var(--color-success-border);
+  outline-offset: 2px;
+}
+
 .btn-action-danger {
   background-color: var(--color-stop-subtle);
   color: var(--color-stop-text);
 }
 
-.btn-action-danger:hover {
+.btn-action-danger:hover,
+.btn-action-danger:focus-visible {
   background-color: var(--color-stop-main);
   outline: 1px solid var(--color-stop-border);
   outline-offset: 2px;
