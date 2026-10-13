@@ -10,16 +10,36 @@
   create routers
   create controllers
 
-(A) {2026-10-05} #views : views follow #EJS_layout_wrapper_functions
-  create main layout: `src/views/layouts/main.ejs`
-  create helper render wrapper: `src/utils/render-helper.ejs`
+(A) {2026-10-05} #views : views follow #EJS_layout_wrapper_functions {cm:2026-10-13}
+  create main layout: `src/views/layouts/main.ejs` {cm:2026-10-13}
+  create helper render wrapper: `src/utils/render-helper.ejs` {cm:2026-10-13}
 
 (A) {2026-10-09} #modules
-  #suppliers
+  #db : clean up db {cm:2026-10-13}
+  #suppliers {cm:2026-10-13}
+    #views : apply styles to @new.ejs {cm:2026-10-13}
   #brands
+    #routes 
+    #controller
+    #views 
   #categories
+    #routes 
+    #controller
+    #views 
   #products
+    #routes 
+    #controller
+    #views 
   #product_variations
+    #routes 
+    #controller
+    #views 
   #line_items
+    #routes 
+    #controller
+    #views 
   #stock_movements
+    #routes 
+    #controller
+    #views 
 
