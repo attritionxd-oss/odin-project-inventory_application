@@ -55,15 +55,13 @@
     <div class="form-group">
       <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") {
       %> <% if (supplier.deleted_at !== null) { %>
-      <form
-        action="/suppliers/<%= supplier.id %>/restore"
-        method="post"
-        class="inline-form"
+      <button
+        form="restoreForm"
+        type="submit"
+        class="btn btn-rect btn-tall btn-primary"
       >
-        <button type="submit" class="btn btn-rect btn-tall btn-primary">
-          Restore
-        </button>
-      </form>
+        Restore
+      </button>
       <%}%>
       <%}%>
       <button type="submit" class="btn btn-rect btn-tall btn-action-go">
@@ -71,4 +69,15 @@
       </button>
     </div>
   </form>
+  <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") {
+      %>
+  <% if (supplier.deleted_at !== null) { %>
+  <form
+    id="restoreForm"
+    action="/suppliers/<%= supplier.id %>/restore"
+    method="post"
+    class="inline-form"
+  ></form>
+  <%}%>
+  <%}%>
 </div>
