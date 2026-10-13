@@ -130,9 +130,15 @@
         <% }); %>
         <% } else { %>
         <tr>
+          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+          <td colspan="6" class="text-center empty-state">
+            No suppliers found.
+          </td>
+          <% } else { %>
           <td colspan="5" class="text-center empty-state">
             No suppliers found.
           </td>
+          <%}%>
         </tr>
         <% } %>
       </tbody>
