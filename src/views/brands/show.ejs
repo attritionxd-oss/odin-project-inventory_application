@@ -1,0 +1,60 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title">Brand: <%= title %></h1>
+    <div class="actions-group">
+      <a href="/brands" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <tbody>
+        <tr>
+          <td>ID</td>
+          <td><%= brand.id %></td>
+        </tr>
+        <tr>
+          <td>Brand name</td>
+          <td><%= brand.brand_name %></td>
+        </tr>
+        <tr>
+          <td>Created</td>
+          <td><%= brand.created_at__formatted %></td>
+        </tr>
+        <tr>
+          <td>Deleted</td>
+          <td><%= brand.deleted_at__formatted %></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="action-group">
+              <a href="/brands/<%= brand.id %>/edit"
+                class="btn btn-sm btn-outline">Edit</a>
+              <% if (currentUser.role === "ADMIN" || currentUser.role ===
+              "ANALYST") { %>
+              <% if (brand.deleted_at === null) { %>
+              <form action="/brands/<%= brand.id %>/delete" method="post"
+                class="inline-form">
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+              <% if (brand.deleted_at !== null) { %>
+              <form action="/brands/<%= brand.id %>/restore" method="post"
+                class="inline-form">
+                <button type="submit" class="btn btn-sm btn-outline">
+                  Restore
+                </button>
+              </form>
+              <%}%>
+              <%}%>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

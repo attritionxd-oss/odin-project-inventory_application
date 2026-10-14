@@ -1,0 +1,53 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+    <div class="actions-group">
+      <a href="/brands" class="btn">Back</a>
+    </div>
+  </div>
+
+  <form action="/brands/<%= brand.id %>" method="post" class="card-form">
+    <div class="form-group">
+      <label for="brand_name">Name</label>
+      <input type="text" name="brand_name" id="brand_name"
+        value="<%= brand.brand_name %>" />
+      <% if (errors) { %>
+      <div class="form-error-string" role="error"><%= errors %></div>
+      <% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="created_at">Created</label>
+      <input type="text" name="created_at" id="created_at"
+        value="<%= brand.created_at__formatted %>" disabled="true"
+        readonly="true" title="<%= brand.created_at %>" />
+    </div>
+
+    <div class="form-group">
+      <label for="deleted_at">Deleted</label>
+      <input type="text" name="deleted_at" id="deleted_at"
+        value="<%= brand.deleted_at__formatted %>" disabled="true"
+        readonly="true" title="<%= brand.deleted_at %>" />
+    </div>
+    <div class="form-group">
+      <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") {
+      %> <% if (brand.deleted_at !== null) { %>
+      <button form="restoreForm" type="submit"
+        class="btn btn-rect btn-tall btn-primary">
+        Restore
+      </button>
+      <%}%>
+      <%}%>
+      <button type="submit" class="btn btn-rect btn-tall btn-action-go">
+        Update
+      </button>
+    </div>
+  </form>
+  <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") {
+      %>
+  <% if (brand.deleted_at !== null) { %>
+  <form id="restoreForm" action="/brands/<%= brand.id %>/restore" method="post"
+    class="inline-form"></form>
+  <%}%>
+  <%}%>
+</div>

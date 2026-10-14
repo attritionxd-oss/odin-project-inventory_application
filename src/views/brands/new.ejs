@@ -1,0 +1,16 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+    <a href="/brands"><button type="button" class="btn">Cancel</button></a>
+  </div>
+
+  <form action="/brands" method="post" class="card-form">
+    <div class="form-group">
+      <label for="brand_name">Name</label>
+      <input type="text" name="brand_name" id="brand_name" />
+    </div>
+
+    <button type="submit"
+      class="btn btn-rect btn-tall btn-action-go">Create</button>
+  </form>
+</div>
