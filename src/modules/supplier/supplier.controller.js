@@ -148,6 +148,7 @@ const supplierController = {
             ? null
             : formatTimestamp(supplier.deleted_at),
         },
+        errors: [],
       });
     } catch (error) {
       next(error);
@@ -175,7 +176,7 @@ const supplierController = {
         return renderWithLayout(res, "suppliers/edit", {
           title: "Edit Supplier",
           supplier: {
-            id,
+            ...supplier,
             supplier_name,
             contact_email,
             created_at__formatted: formatTimestamp(supplier.created_at),
