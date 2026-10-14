@@ -17,19 +17,29 @@ const brandService = {
     return rows[0];
   },
 
-  getAll: async ({ includeDeleted = false } = {}) => {
-    const SQL = includeDeleted
-      ? /* sql */ `
+  getAll: async ({
+    includeDeleted = false,
+    orderByField = "brand_name",
+    isOrderAscBool = true,
+  } = {}) => {
+    const isOrderAsc = isOrderAscBool ? "ASC" : "DESC";
+
+    const SQL = format(
+      includeDeleted
+        ? /* sql */ `
         SELECT * 
         FROM brands
-        ORDER BY brand_name ASC;
+        ORDER BY %s %s;
       `
-      : /* sql */ `
+        : /* sql */ `
         SELECT * 
         FROM brands
         WHERE deleted_at IS NULL
-        ORDER BY brand_name ASC;
-      `;
+        ORDER BY %s %s;
+      `,
+      orderByField,
+      isOrderAsc,
+    );
     const { rows: brands } = await pool.query(SQL);
     return brands;
   },
@@ -39,14 +49,14 @@ const brandService = {
       /* sql */ `
         SELECT *
         FROM brands
-        WHERE id = %L
-        AND deleted_at IS NULL;
+        WHERE id = %L;
       `,
       id,
     );
     const { rows: brand } = await pool.query(SQL);
     return brand[0] || null;
   },
+
   update: async (id, { brand_name }) => {
     if (!id || id === "") throw new Error("`id` must be specified");
 
@@ -57,12 +67,27 @@ const brandService = {
     const { rows } = await pool.query(query);
     return rows[0] || null;
   },
+
   softDelete: async (id) => {
     if (!id || id === "") throw new Error("`id` must be specified");
 
     const SQL = format(
       /* sql */ `
       UPDATE brands SET deleted_at = NOW()
+      WHERE id = %L
+      RETURNING *;
+    `,
+      id,
+    );
+    const result = await pool.query(SQL);
+    return result;
+  },
+
+  restore: async (id) => {
+    if (!id || id === "") throw new Error("`id` must be specified");
+    const SQL = format(
+      /* sql */ `
+      UPDATE brands SET deleted_at = NULL
       WHERE id = %L
       RETURNING *;
     `,
