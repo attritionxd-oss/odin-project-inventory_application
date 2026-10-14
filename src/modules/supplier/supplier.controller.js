@@ -5,7 +5,7 @@ import { formatTimestamp } from "#utils/formatTimestamp.js";
 const supplierController = {
   index: async (req, res, next) => {
     try {
-      const includeDeleted =
+      const isRoleAuthorized =
         res.locals?.currentUser.role === "ADMIN" ||
         res.locals?.currentUser.role === "ANALYST";
 
@@ -25,7 +25,7 @@ const supplierController = {
       const isOrderAscBool = orderQuery === "desc" ? false : true;
 
       const suppliers = await supplierService.getAll({
-        includeDeleted,
+        includeDeleted: true,
         orderByField,
         isOrderAscBool,
       });
@@ -52,6 +52,7 @@ const supplierController = {
         currentSort,
         currentOrder: isOrderAscBool ? "asc" : "desc",
         getSortUrl,
+        isRoleAuthorized,
       });
     } catch (error) {
       next(error);

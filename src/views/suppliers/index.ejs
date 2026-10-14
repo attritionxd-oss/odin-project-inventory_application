@@ -10,135 +10,97 @@
       <thead>
         <tr>
           <th class="col-id">
-            <a
-              href="<%= getSortUrl('id') %>"
-              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>"
-              >ID<span class="sort-icon"
-                ><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span
-              >
+            <a href="<%= getSortUrl('id') %>"
+              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>">ID<span
+                class="sort-icon"><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span>
             </a>
           </th>
           <th class="text-left">
-            <a
-              href="<%= getSortUrl('name') %>"
-              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>"
-              >Name<span class="sort-icon"
-                ><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span
-              >
+            <a href="<%= getSortUrl('name') %>"
+              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>">Name<span
+                class="sort-icon"><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span>
             </a>
           </th>
           <th class="text-left">
-            <a
-              href="<%= getSortUrl('contact') %>"
-              class="sort-link <%= currentSort === 'contact' ? 'active' : '' %>"
-              >Contact<span class="sort-icon"
-                ><%= currentSort === 'contact' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span
-              >
+            <a href="<%= getSortUrl('contact') %>"
+              class="sort-link <%= currentSort === 'contact' ? 'active' : '' %>">Contact<span
+                class="sort-icon"><%= currentSort === 'contact' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span>
             </a>
           </th>
           <th class="text-left">
-            <a
-              href="<%= getSortUrl('created') %>"
-              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>"
-              >Created<span class="sort-icon"
-                ><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span
-              >
+            <a href="<%= getSortUrl('created') %>"
+              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>">Created<span
+                class="sort-icon"><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span>
             </a>
           </th>
-          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
           <th class="text-left">
-            <a
-              href="<%= getSortUrl('deleted') %>"
-              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>"
-              >Deleted<span class="sort-icon"
-                ><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span
-              >
+            <a href="<%= getSortUrl('deleted') %>"
+              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>">Deleted<span
+                class="sort-icon"><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span>
             </a>
           </th>
-          <% } %>
           <th class="col-actions">Action</th>
         </tr>
       </thead>
       <tbody>
-        <% if (suppliers && suppliers.length > 0) { %> <%
-        suppliers.forEach((supplier) => { %>
+        <% if (suppliers && suppliers.length > 0) {
+          suppliers.forEach((supplier) => { %>
         <tr>
           <td class="col-id">
-            <a href="/suppliers/<%= supplier.id %>" class="table-link"
-              ><%= supplier.id %></a
-            >
+            <a href="/suppliers/<%= supplier.id %>"
+              class="table-link"><%= supplier.id %></a>
           </td>
+
           <td class="text-left"><%= supplier.supplier_name %></td>
+
           <td class="text-left"><%= supplier.contact_email %></td>
+
           <td class="text-left">
-            <time
-              datetime="<%= supplier.created_at__formatted %>"
-              title="<%= supplier.created_at %>"
-              ><%= supplier.created_at__formatted %></time
-            >
+            <time datetime="<%= supplier.created_at__formatted %>"
+              title="<%= supplier.created_at %>"><%= supplier.created_at__formatted %></time>
           </td>
-          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+
           <td class="text-left">
-            <time
-              datetime="<%= supplier.deleted_at__formatted %>"
-              title="<%= supplier.deleted_at %>"
-              ><%= supplier.deleted_at__formatted %></time
-            >
+            <time datetime="<%= supplier.deleted_at__formatted %>"
+              title="<%= supplier.deleted_at %>"><%= supplier.deleted_at__formatted %></time>
           </td>
-          <% } %>
+
           <td class="col-actions">
             <div class="actions-group">
-              <a
-                href="/suppliers/<%= supplier.id %>/edit"
-                class="btn btn-sm btn-outline"
-                >Edit</a
-              >
-              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+              <a href="/suppliers/<%= supplier.id %>/edit"
+                class="btn btn-sm btn-outline">Edit</a>
+
               <% if (supplier.deleted_at === null) { %>
-              <form
-                action="/suppliers/<%= supplier.id %>/delete"
-                method="post"
-                class="inline-form"
-              >
+              <form action="/suppliers/<%= supplier.id %>/delete" method="post"
+                class="inline-form">
                 <button type="submit" class="btn btn-sm btn-action-danger">
                   Delete
                 </button>
               </form>
               <%}%>
-              <%}%>
-              <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
+
               <% if (supplier.deleted_at !== null) { %>
-              <form
-                action="/suppliers/<%= supplier.id %>/restore"
-                method="post"
-                class="inline-form"
-              >
+              <form action="/suppliers/<%= supplier.id %>/restore" method="post"
+                class="inline-form">
                 <button type="submit" class="btn btn-sm btn-outline">
                   Restore
                 </button>
               </form>
               <%}%>
-              <%}%>
             </div>
           </td>
         </tr>
         <% }); %>
-        <% } else { %>
+              <% } else { %>
         <tr>
-          <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
           <td colspan="6" class="text-center empty-state">
             No suppliers found.
           </td>
-          <% } else { %>
-          <td colspan="5" class="text-center empty-state">
-            No suppliers found.
-          </td>
-          <%}%>
         </tr>
         <% } %>
       </tbody>
