@@ -160,6 +160,11 @@
   outline-offset: 3px;
 }
 
+.form-error-string {
+  color: var(--color-stop-main);
+  text-align: center;
+}
+
 @media (width <= 900px) {
   .actions-group {
     flex-direction: column;

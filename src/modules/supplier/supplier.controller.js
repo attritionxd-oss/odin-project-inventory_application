@@ -133,7 +133,6 @@ const supplierController = {
       }
 
       const supplier = await supplierService.getById(id);
-
       if (!supplier) {
         const error = new Error(`Supplier #${req.params[0]} was not found.`);
         error.statusCode = 404;
@@ -165,11 +164,25 @@ const supplierController = {
       }
 
       const { supplier_name, contact_email } = req.body;
+      const supplier = await supplierService.getById(id);
+      if (!supplier) {
+        const error = new Error(`Supplier #${req.params[0]} was not found.`);
+        error.statusCode = 404;
+        return next(error);
+      }
 
       if (!supplier_name || !supplier_name.trim()) {
         return renderWithLayout(res, "suppliers/edit", {
           title: "Edit Supplier",
-          supplier: { id, supplier_name, contact_email },
+          supplier: {
+            id,
+            supplier_name,
+            contact_email,
+            created_at__formatted: formatTimestamp(supplier.created_at),
+            deleted_at__formatted: !supplier.deleted_at
+              ? null
+              : formatTimestamp(supplier.deleted_at),
+          },
           errors: ["Supplier name cannot be empty."],
         });
       }
