@@ -201,7 +201,7 @@ const supplierController = {
           return next(error);
         }
 
-        const { supplier_name, contact_email } = req.body;
+        const { supplier_name, contact_email } = matchedData(req);
         const supplier = await supplierService.getById(id);
         if (!supplier) {
           const error = new Error(`Supplier #${req.params[0]} was not found.`);
@@ -227,8 +227,8 @@ const supplierController = {
         }
 
         const updatedSupplier = await supplierService.update(id, {
-          supplier_name: supplier_name.trim(),
-          contact_email: contact_email ? contact_email.trim() : null,
+          supplier_name: supplier_name,
+          contact_email: contact_email,
         });
 
         if (!updatedSupplier) {
