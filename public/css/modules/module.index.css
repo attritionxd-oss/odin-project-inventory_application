@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: calc(var(--standard-gap) * 2);
+  gap: var(--standard-gap);
 }
 
 .card-title {
@@ -158,6 +159,23 @@
 .card-form input:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 3px;
+}
+
+.card-form input:read-only {
+  color: var(--color-mono-400);
+  pointer-events: none;
+}
+
+.form-errors {
+  display: flex;
+  flex-direction: column;
+  padding: var(--standard-gap);
+  background-color: var(--color-mono-900);
+}
+
+.form-error-item {
+  color: var(--color-stop-main);
+  text-align: center;
 }
 
 .form-error-string {

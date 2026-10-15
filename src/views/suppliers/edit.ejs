@@ -1,6 +1,6 @@
 <div class="card-container">
   <div class="card-header">
-    <h1 class="card-title">Supplier: <%= title %></h1>
+    <h1 class="card-title">Edit Supplier: <%= title %></h1>
     <div class="actions-group">
       <a href="/suppliers" class="btn">Back</a>
     </div>
@@ -8,6 +8,7 @@
 
   <form action="/suppliers/<%= supplier.id %>" method="post" class="card-form">
     <div class="form-group">
+      <input type="text" name="id" id="id" value="<%= supplier.id %>" style="display: none;">
       <label for="supplier_name">Name</label>
       <input
         type="text"
@@ -15,9 +16,6 @@
         id="supplier_name"
         value="<%= supplier.supplier_name %>"
       />
-      <% if (errors) { %>
-      <div class="form-error-string" role="error"><%= errors %></div>
-      <% } %>
     </div>
 
     <div class="form-group">
@@ -37,7 +35,7 @@
         name="created_at"
         id="created_at"
         value="<%= supplier.created_at__formatted %>"
-        disabled="true"
+        tabindex="-1"
         readonly="true"
         title="<%= supplier.created_at %>"
       />
@@ -50,11 +48,12 @@
         name="deleted_at"
         id="deleted_at"
         value="<%= supplier.deleted_at__formatted %>"
-        disabled="true"
+        tabindex="-1"
         readonly="true"
         title="<%= supplier.deleted_at %>"
       />
     </div>
+    <%- include("../partials/form-errors") %>
     <div class="form-group">
       <% if (!!supplier.deleted_at) { %>
       <button
