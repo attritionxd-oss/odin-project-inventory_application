@@ -9,34 +9,46 @@
       <thead>
         <tr>
           <th class="col-id">
-            <a href="<%= getSortUrl('id') %>"
-              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>">ID<span
-                class="sort-icon"><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span>
+            <a
+              href="<%= getSortUrl('id') %>"
+              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>"
+              >ID<span class="sort-icon"
+                ><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
             </a>
           </th>
 
           <th class="text-left">
-            <a href="<%= getSortUrl('name') %>"
-              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>">Name<span
-                class="sort-icon"><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span>
+            <a
+              href="<%= getSortUrl('name') %>"
+              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>"
+              >Name<span class="sort-icon"
+                ><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
             </a>
           </th>
 
           <th class="text-left">
-            <a href="<%= getSortUrl('created') %>"
-              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>">Created<span
-                class="sort-icon"><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span>
+            <a
+              href="<%= getSortUrl('created') %>"
+              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>"
+              >Created<span class="sort-icon"
+                ><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
             </a>
           </th>
 
           <th class="text-left">
-            <a href="<%= getSortUrl('deleted') %>"
-              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>">Deleted<span
-                class="sort-icon"><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
-                '▼'): '↕' %></span>
+            <a
+              href="<%= getSortUrl('deleted') %>"
+              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>"
+              >Deleted<span class="sort-icon"
+                ><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
             </a>
           </th>
 
@@ -45,35 +57,47 @@
       </thead>
 
       <tbody>
-        <% if (brands && brands.length > 0) { %>
-        <% brands.forEach((brand) => { %>
+        <% if (brands && brands.length > 0) { %> <% brands.forEach((brand) => {
+        %>
         <tr>
           <td class="col-id">
-            <a href="/brands/<%= brand.id %>"
-              class="table-link"><%= brand.id %></a>
+            <a href="/brands/<%= brand.id %>" class="table-link"
+              ><%= brand.id %></a
+            >
           </td>
 
           <td class="text-left"><%= brand.brand_name %></td>
 
           <td class="text-left">
-            <time datetime="<%= brand.created_at__formatted %>"
-              title="<%= brand.created_at %>"><%= brand.created_at__formatted %></time>
+            <time
+              datetime="<%= brand.created_at__formatted %>"
+              title="<%= brand.created_at %>"
+              ><%= brand.created_at__formatted %></time
+            >
           </td>
 
           <td class="text-left">
-            <time datetime="<%= brand.deleted_at__formatted %>"
-              title="<%= brand.deleted_at %>"><%= brand.deleted_at__formatted %></time>
+            <time
+              datetime="<%= brand.deleted_at__formatted %>"
+              title="<%= brand.deleted_at %>"
+              ><%= brand.deleted_at__formatted %></time
+            >
           </td>
 
           <td class="col-actions">
             <div class="actions-group">
-
-              <a href="/brands/<%= brand.id %>/edit"
-                class="btn btn-sm btn-outline">Edit</a>
+              <a
+                href="/brands/<%= brand.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
 
               <% if (brand.deleted_at === null) { %>
-              <form action="/brands/<%= brand.id %>/delete" method="post"
-                class="inline-form">
+              <form
+                action="/brands/<%= brand.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
                 <button type="submit" class="btn btn-sm btn-action-danger">
                   Delete
                 </button>
@@ -81,23 +105,23 @@
               <%}%>
 
               <% if (brand.deleted_at !== null) { %>
-              <form action="/brands/<%= brand.id %>/restore" method="post"
-                class="inline-form">
+              <form
+                action="/brands/<%= brand.id %>/restore"
+                method="post"
+                class="inline-form"
+              >
                 <button type="submit" class="btn btn-sm btn-outline">
                   Restore
                 </button>
               </form>
               <%}%>
-
             </div>
           </td>
         </tr>
         <% }); %>
-              <% } else { %>
+        <% } else { %>
         <tr>
-          <td colspan="5" class="text-center empty-state">
-            No brands found.
-          </td>
+          <td colspan="5" class="text-center empty-state">No brands found.</td>
         </tr>
         <% } %>
       </tbody>

@@ -32,13 +32,19 @@
         <tr>
           <td colspan="2">
             <div class="action-group">
-              <a href="/suppliers/<%= supplier.id %>/edit"
-                class="btn btn-sm btn-outline">Edit</a>
+              <a
+                href="/suppliers/<%= supplier.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
               <% if (currentUser.role === "ADMIN" || currentUser.role ===
               "ANALYST") { %>
               <% if (supplier.deleted_at === null) { %>
-              <form action="/suppliers/<%= supplier.id %>/delete" method="post"
-                class="inline-form">
+              <form
+                action="/suppliers/<%= supplier.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
                 <button type="submit" class="btn btn-sm btn-action-danger">
                   Delete
                 </button>
@@ -47,8 +53,11 @@
               <%}%>
               <% if (currentUser.role === "ADMIN" || currentUser.role === "ANALYST") { %>
               <% if (supplier.deleted_at !== null) { %>
-              <form action="/suppliers/<%= supplier.id %>/restore" method="post"
-                class="inline-form">
+              <form
+                action="/suppliers/<%= supplier.id %>/restore"
+                method="post"
+                class="inline-form"
+              >
                 <button type="submit" class="btn btn-sm btn-outline">
                   Restore
                 </button>

@@ -11,7 +11,7 @@ import { handleNotFound, handleGlobalError } from "#middleware/errorHandler.js";
 import indexRoutes from "#modules/index/index.routes.js";
 import authRoutes from "#modules/auth/auth.routes.js";
 import supplierRoutes from "#modules/supplier/supplier.routes.js";
-import brandRoutes from "#modules/brand/brand.routes.js"
+import brandRoutes from "#modules/brand/brand.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
