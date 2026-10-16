@@ -100,6 +100,10 @@
   width: clamp(4ch, 7ch, 10ch);
 }
 
+.col-id.fit {
+  width: fit-content;
+}
+
 .col-actions {
   text-align: center;
   width: 160px;
@@ -149,7 +153,8 @@
   gap: calc(var(--standard-gap) * 0.5);
 }
 
-.card-form input {
+.card-form input,
+.card-form select {
   height: 4rem;
   border: 1px solid var(--text);
   padding: 0 var(--standard-gap);

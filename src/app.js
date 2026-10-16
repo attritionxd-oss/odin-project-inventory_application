@@ -12,6 +12,7 @@ import indexRoutes from "#modules/index/index.routes.js";
 import authRoutes from "#modules/auth/auth.routes.js";
 import supplierRoutes from "#modules/supplier/supplier.routes.js";
 import brandRoutes from "#modules/brand/brand.routes.js";
+import categoryRoutes from "#modules/category/category.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,6 +37,7 @@ app.use("/", authRoutes);
 app.use("/", indexRoutes);
 app.use("/suppliers", requireAuth, supplierRoutes);
 app.use("/brands", requireAuth, brandRoutes);
+app.use("/categories", requireAuth, categoryRoutes);
 
 app.use(handleNotFound);
 app.use(handleGlobalError);

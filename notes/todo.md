@@ -18,14 +18,15 @@
   #db : clean up db {cm:2026-10-13}
   #suppliers {cm:2026-10-13}
     #views : apply styles to @new.ejs {cm:2026-10-13}
-  #brands
-    #routes 
-    #controller
-    #views 
-  #categories
-    #routes 
-    #controller
-    #views 
+  #brands {cm:2026-10-17}
+    #routes {cm:2026-10-17}
+    #controller {cm:2026-10-17}
+    #views {cm:2026-10-17}
+  #categories {cm:2026-10-17}
+    #routes {cm:2026-10-17}
+    #controller {cm:2026-10-17}
+    #views {cm:2026-10-17}
+      #breadcrumbs styling : Suggested style for breadcrumbs using `<nav class="crumbs">` and `{css}.crumb a::after{content: ">";}`, see example [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav). {cm:2026-10-17}
   #products
     #routes 
     #controller

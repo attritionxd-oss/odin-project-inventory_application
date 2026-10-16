@@ -1,0 +1,53 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title">Category: <%= title %></h1>
+    <div class="actions-group">
+      <a href="/categories" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <tbody>
+        <tr>
+          <td>ID</td>
+          <td><%= category.id %></td>
+        </tr>
+        <tr>
+          <td>Supplier name</td>
+          <td><%= category.category_name %></td>
+        </tr>
+        <tr>
+          <td>Parent name</td>
+          <td><%= category.parent_name %></td>
+        </tr>
+        <tr>
+          <td>Category path</td>
+          <td>
+            <%= breadcrumbsPath %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="action-group">
+              <a
+                href="/categories/<%= category.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
+              <form
+                action="/categories/<%= category.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

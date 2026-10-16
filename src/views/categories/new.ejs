@@ -1,0 +1,34 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+    <a href="/categories"><button type="button" class="btn">Cancel</button></a>
+  </div>
+
+  <form action="/categories" method="post" class="card-form">
+    <div class="form-group">
+      <label for="category_name">Name</label>
+      <input
+        type="text"
+        name="category_name"
+        id="category_name"
+        value="<%= formData.category_name %>"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="parent_id">Ancestor path</label>
+      <select name="parent_id" id="parent_id">
+        <option value="">No parent/ancestors</option>
+        <% categories.forEach(category => { %>
+        <option value="<%= category.id %>"><%= category.path %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <%- include("../partials/form-errors") %>
+
+    <button type="submit" class="btn btn-rect btn-tall btn-action-go">
+      Create
+    </button>
+  </form>
+</div>

@@ -1,0 +1,101 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+    <a href="/categories/new" class="btn btn-primary">Add Category</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-id">
+            <a
+              href="<%= getSortUrl('id') %>"
+              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>"
+              >ID<span class="sort-icon"
+                ><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('name') %>"
+              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>"
+              >Name<span class="sort-icon"
+                ><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('parent_id') %>"
+              class="sort-link <%= currentSort === 'parent_id' ? 'active' : '' %>"
+              >Parent ID<span class="sort-icon"
+                ><%= currentSort === 'parent_id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('parent') %>"
+              class="sort-link <%= currentSort === 'parent' ? 'active' : '' %>"
+              >Path<span class="sort-icon"
+                ><%= currentSort === 'parent' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+          <th class="col-actions">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (categories && categories.length > 0) { %> <%
+        categories.forEach((category) => { %>
+        <tr>
+          <td class="col-id">
+            <a href="/categories/<%= category.id %>" class="table-link"
+              ><%= category.id %></a
+            >
+          </td>
+
+          <td class="text-left"><%= category.category_name %></td>
+
+          <td class="col-id fit"><%= category.parent_id %></td>
+
+          <td class="text-left"><%= category.path %></td>
+
+          <td class="col-actions">
+            <div class="actions-group">
+              <a
+                href="/categories/<%= category.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
+
+              <form
+                action="/categories/<%= category.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <% }); %>
+        <% } else { %>
+        <tr>
+          <td colspan="2" class="text-center empty-state">
+            No categories found.
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
