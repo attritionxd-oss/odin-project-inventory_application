@@ -18,7 +18,10 @@ const categoryService = {
     return rows[0];
   },
 
-  getAll: async ({ orderByField = "category_name", isOrderAscBool = true }) => {
+  getAll: async ({
+    orderByField = "category_name",
+    isOrderAscBool = true,
+  } = {}) => {
     const orderBy = {
       id: "c.id",
       category_name: "c.category_name",
