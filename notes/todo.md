@@ -43,9 +43,11 @@
     #routes 
     #controller
     #views 
+  #dashboard
+    #views - show indicator for record count from each module
 
-(A) {2026-10-17} create reusable validation middleware
-  create `src/middleware/validate.js`
-  create `src/modules/categories/category.validation.js`
-  integrate middleware into `category.routes.js` (adds `validationErrors` into `req`)
-  use `req.validationErrors` in `category.controller.js`
+(A) {2026-10-17} create reusable validation middleware on #categories {cm:2026-10-18}
+  create `src/middleware/validate.js` {cm:2026-10-18}
+  create `src/modules/categories/category.validation.js` {cm:2026-10-18}
+  integrate middleware into `category.routes.js` (adds `validationErrors` into `req`) {cm:2026-10-18}
+  use `req.validationErrors` in `category.controller.js` {cm:2026-10-18}

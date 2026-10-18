@@ -20,7 +20,15 @@
       <select name="parent_id" id="parent_id">
         <option value="">No parent/ancestors</option>
         <% categories.forEach(category => { %>
+
+        <% if (Number(category.id) === Number(formData.parent_id)) { %>
+        <!-- prettier-ignore -->
+        <option value="<%= category.id %>" selected><%= category.path %></option>
+        <% } else { %>
+        <!-- prettier-ignore -->
         <option value="<%= category.id %>"><%= category.path %></option>
+        <% } %>
+
         <% }) %>
       </select>
     </div>

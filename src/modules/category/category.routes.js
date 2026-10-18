@@ -1,6 +1,8 @@
 import { Router } from "express";
+import { validate } from "#middleware/validate.js";
 import { requireRole } from "#middleware/authorize.js";
 import categoryController from "./category.controller.js";
+import { validateCategory } from "./category.validation.js";
 
 const router = Router();
 
@@ -12,7 +14,12 @@ router.get(
   categoryController.newForm,
 );
 
-router.post("/", requireRole("SPECIALIST", "ADMIN"), categoryController.create);
+router.post(
+  "/",
+  requireRole("SPECIALIST", "ADMIN"),
+  validate(validateCategory),
+  categoryController.create,
+);
 
 router.get(/^\/(\d+)$/, categoryController.show);
 
@@ -25,6 +32,7 @@ router.get(
 router.post(
   /^\/(\d+)$/,
   requireRole("SPECIALIST", "ADMIN"),
+  validate(validateCategory),
   categoryController.update,
 );
 
