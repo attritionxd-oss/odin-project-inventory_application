@@ -71,30 +71,6 @@ const categoryService = {
     return rows;
   },
 
-  getAllCategoryAncestors: async () => {
-    const query = /* sql */ `
-      WITH RECURSIVE category_path AS (
-        SELECT id, category_name, parent_id, 1 AS depth
-        FROM categories
-        WHERE parent_id IS NOT NULL
-
-        UNION ALL
-        SELECT c.id, c.category_name, c.parent_id, cp.depth + 1
-        FROM categories c
-        JOIN category_path cp ON c.id = cp.parent_id
-      )
-      SELECT 
-        cp.*,
-        p.category_name AS parent_name
-      FROM category_path cp
-      LEFT JOIN categories p
-        ON cp.parent_id = p.id
-      ORDER BY depth DESC;
-    `;
-    const { rows } = await pool.query(query);
-    return rows;
-  },
-
   getAllCategoriesWithAncestors: async ({
     orderByField = "category_name",
     isOrderAscBool = true,
@@ -166,7 +142,7 @@ const categoryService = {
         FROM categories c
         LEFT JOIN categories p
           ON c.parent_id = p.id
-        WHERE id = %L;
+        WHERE c.id = %L;
       `,
       id,
     );

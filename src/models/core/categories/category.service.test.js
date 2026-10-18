@@ -53,6 +53,97 @@ describe("Category Service Integration", () => {
     });
   });
 
+  describe("getCategoryAncestors()", () => {
+    it("should return a category record's ancestors", async () => {
+      const cat1a = await categoryService.create({
+        category_name: "Test category 1",
+      });
+      const cat1b = await categoryService.create({
+        category_name: "Test category 2",
+        parent_id: cat1a.id,
+      });
+      const cat1c = await categoryService.create({
+        category_name: "Test category 3",
+        parent_id: cat1b.id,
+      });
+
+      const catWithAncestors = await categoryService.getCategoryAncestors(
+        cat1c.id,
+      );
+      expect(catWithAncestors).toEqual([
+        {
+          id: 1,
+          category_name: "Test category 1",
+          parent_id: null,
+          depth: 3,
+          parent_name: null,
+        },
+        {
+          id: 2,
+          category_name: "Test category 2",
+          parent_id: 1,
+          depth: 2,
+          parent_name: "Test category 1",
+        },
+        {
+          id: 3,
+          category_name: "Test category 3",
+          parent_id: 2,
+          depth: 1,
+          parent_name: "Test category 2",
+        },
+      ]);
+    });
+  });
+
+  describe("getAllCategoriesWithAncestors()", () => {
+    it("should return all records with ancestry data from itself to the most distant ancestor", async () => {
+      const cat1a = await categoryService.create({
+        category_name: "Test category 1",
+      });
+      const cat1b = await categoryService.create({
+        category_name: "Test category 2",
+        parent_id: cat1a.id,
+      });
+      await categoryService.create({
+        category_name: "Test category 3",
+        parent_id: cat1b.id,
+      });
+      await categoryService.create({
+        category_name: "Test category 4",
+        parent_id: null,
+      });
+
+      const catWithAncestors =
+        await categoryService.getAllCategoriesWithAncestors();
+      expect(catWithAncestors).toMatchObject([
+        { id: 1, ancestors: [{ id: 1 }] },
+        { id: 2, ancestors: [{ id: 1 }, { id: 2 }] },
+        { id: 3, ancestors: [{ id: 1 }, { id: 2 }, { id: 3 }] },
+        { id: 4, ancestors: [{ id: 4 }] },
+      ]);
+    });
+  });
+
+  describe("getDescendantIds()", () => {
+    it("should return all records with ancestry data from itself to the most distant ancestor", async () => {
+      const cat1a = await categoryService.create({
+        category_name: "Test category 1",
+      });
+      const cat1b = await categoryService.create({
+        category_name: "Test category 2",
+        parent_id: cat1a.id,
+      });
+      await categoryService.create({
+        category_name: "Test category 3",
+        parent_id: cat1b.id,
+      });
+
+      const descendants = await categoryService.getDescendantIds(cat1a.id);
+      expect(descendants).toEqual([2, 3]);
+    });
+  });
+
   describe("getById()", () => {
     it("should return data when ID is found", async () => {
       await categoryService.create({
