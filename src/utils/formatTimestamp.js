@@ -19,6 +19,12 @@ export function formatTimestamp(
   }
 
   const variantPresets = {
+    dateOnly: {
+      // e.g., "10/07/2026"
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    },
     short: {
       dateStyle: "short", // e.g., "10/7/26"
       timeStyle: "short", // e.g., "11:18 AM"
