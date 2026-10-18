@@ -57,10 +57,42 @@ describe("Product Service Integration", () => {
         product_description: "RGB Mechanical Keyboard",
       };
 
-      await productService.create(payload);
+      const newProduct = await productService.create(payload);
+      expect(newProduct.rowCount).toBe(1);
+      expect(newProduct.rows).toMatchObject([
+        {
+          brand_id: seeds.brand_id,
+          category_id: seeds.category_id,
+          supplier_id: seeds.supplier_id,
+          product_name: "Mechanical Keyboard",
+          product_description: "RGB Mechanical Keyboard",
+        },
+      ]);
 
       const product = await productService.getById(1);
       expect(product.product_name).toBe("Mechanical Keyboard");
+    });
+
+    it("should create a record even with incomplete foreign keys", async () => {
+      const seeds = await createSeedData();
+
+      const payload = {
+        ...seeds,
+        supplier_id: null,
+        product_name: "Mechanical Keyboard",
+        product_description: "RGB Mechanical Keyboard",
+      };
+
+      const newProduct = await productService.create(payload);
+      expect(newProduct.rows).toMatchObject([
+        {
+          brand_id: seeds.brand_id,
+          category_id: seeds.category_id,
+          supplier_id: null,
+          product_name: "Mechanical Keyboard",
+          product_description: "RGB Mechanical Keyboard",
+        },
+      ]);
     });
 
     it("getProductById should return null when products table is empty", async () => {
@@ -244,6 +276,27 @@ describe("Product Service Integration", () => {
       const deletionResult = await productService.softDelete(99);
 
       expect(deletionResult.rowCount).toBe(0);
+    });
+  });
+
+  describe("restore", () => {
+    it("should remove deleted indicator", async () => {
+      const seeds = await createSeedData();
+
+      await productService.create({
+        ...seeds,
+        product_name: "Mechanical Keyboard",
+        product_description: "RGB Mechanical Keyboard",
+      });
+
+      await productService.softDelete(1);
+      // expect(await productService.getById(1)).toEqual();
+      let allProds = await productService.getAll({ includeDeleted: true });
+      expect(allProds[0].deleted_at).not.toBeNull();
+
+      await productService.restore(1);
+      allProds = await productService.getAll({ includeDeleted: true });
+      expect(allProds[0].deleted_at).toBeNull();
     });
   });
 });

@@ -1,4 +1,5 @@
 import { pool } from "#models/pool.js";
+import format from "pg-format";
 
 const productService = {
   create: async ({
@@ -29,7 +30,22 @@ const productService = {
     brand_id,
     supplier_id,
     includeDeleted = false,
+    orderByField = "name",
+    isOrderAscBool = true,
   } = {}) => {
+    const isOrderAsc = isOrderAscBool ? "ASC" : "DESC";
+    const orderByMap = {
+      id: "p.id",
+      brand: "b.brand_name",
+      supplier: "s.supplier_name",
+      category: "c.category_name",
+      name: "p.product_name",
+      created: "p.created_at",
+      deleted: "p.deleted_at",
+    };
+
+    const targetSortColumn = orderByMap[orderByField] || "p.product_name";
+
     let query = /* sql */ `
       SELECT
         p.*,
@@ -60,7 +76,8 @@ const productService = {
       params.push(supplier_id);
       query += ` AND p.supplier_id = $${params.length}`;
     }
-    query += ` ORDER BY p.product_name ASC;`;
+
+    query += format(/* sql */ ` ORDER BY %s %s;`, targetSortColumn, isOrderAsc);
 
     const { rows: products } = await pool.query(query, params);
     return products;
@@ -134,6 +151,20 @@ const productService = {
       RETURNING *;
     `;
     const result = await pool.query(SQL, [id]);
+    return result;
+  },
+
+  restore: async (id) => {
+    if (!id || id === "") throw new Error("`id` must be specified");
+    const SQL = format(
+      /* sql */ `
+      UPDATE products SET deleted_at = NULL
+      WHERE id = %L
+      RETURNING *;
+    `,
+      id,
+    );
+    const result = await pool.query(SQL);
     return result;
   },
 };
