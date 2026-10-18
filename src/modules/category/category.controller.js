@@ -1,11 +1,7 @@
 import { body, validationResult, matchedData } from "express-validator";
 import categoryService from "#models/core/categories/category.service.js";
 import { renderWithLayout } from "#utils/renderHelper.js";
-
-const parseId = (idParam) => {
-  const parsed = parseInt(idParam, 10);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
-};
+import { parseId } from "#utils/parse-id.js";
 
 const emptyErr = "must not be empty";
 const lengthErr = "must be between 1 and 255 characters";
