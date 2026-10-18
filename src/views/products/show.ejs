@@ -1,0 +1,65 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title">Product: <%= title %></h1>
+    <a href="/products" class="btn btn-primary">Back</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <tbody>
+        <tr>
+          <td>ID</td>
+          <td><%= product.id %></td>
+        </tr>
+
+        <tr>
+          <td>Product name</td>
+          <td><%= product.product_name %></td>
+        </tr>
+
+        <tr>
+          <td>Product name</td>
+          <td><%- product.product_description %></td>
+        </tr>
+
+        <tr>
+          <td>Brand</td>
+          <td><%= brand?.brand_name || "No brand name" %></td>
+        </tr>
+
+        <tr>
+          <td>Category</td>
+          <td><%= category?.path || "No category / uncategorized" %></td>
+        </tr>
+
+        <tr>
+          <td>Supplier</td>
+          <td><%= supplier?.supplier_name || "No supplier" %></td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <div class="action-group">
+              <a
+                href="/products/<%= product.id %>/edit"
+                class="btn btn-sm btn-outline"
+              >
+                Edit
+              </a>
+
+              <form
+                action="/products/<%= product.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

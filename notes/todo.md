@@ -27,10 +27,10 @@
     #controller {cm:2026-10-17}
     #views {cm:2026-10-17}
       #breadcrumbs styling : Suggested style for breadcrumbs using `<nav class="crumbs">` and `{css}.crumb a::after{content: ">";}`, see example [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav). {cm:2026-10-17}
-  #products
-    #routes 
-    #controller
-    #views 
+  #products {cm:2026-10-18}
+    #routes {cm:2026-10-18}
+    #controller {cm:2026-10-18}
+    #views {cm:2026-10-18}
   #product_variations
     #routes 
     #controller
@@ -44,3 +44,8 @@
     #controller
     #views 
 
+(A) {2026-10-17} create reusable validation middleware
+  create `src/middleware/validate.js`
+  create `src/modules/categories/category.validation.js`
+  integrate middleware into `category.routes.js` (adds `validationErrors` into `req`)
+  use `req.validationErrors` in `category.controller.js`

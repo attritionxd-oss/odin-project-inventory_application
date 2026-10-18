@@ -1,0 +1,270 @@
+<div class="card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+    <a href="/products/new" class="btn btn-primary">Add Product</a>
+  </div>
+
+  <form action="/products" method="get" class="filter-toolbar">
+    <input type="hidden" name="sort" value="<%= currentSort %>" />
+    <input type="hidden" name="order" value="<%= currentOrder %>" />
+
+    <div class="form-group-row">
+      <label for="brand_id">
+        <select name="brand_id" id="brand_id" class="form-control">
+          <option value="">All Brands</option>
+          <% brands.forEach((b) => { %>
+
+          <% if (Number(selectedFilters.brand_id) === Number(b.id)) { %>
+          <option value="<%= b.id %>" selected>
+            <%= b.brand_name %>
+          </option>
+          <% } else { %>
+          <option value="<%= b.id %>"><%= b.brand_name %></option>
+          <% } %>
+
+          <% }); %>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-group-row">
+      <label for="category_id">
+        <select name="category_id" id="category_id" class="form-control">
+          <option value="">All Categories</option>
+          <% categories.forEach((c) => { %>
+
+          <% if (Number(selectedFilters.category_id) === Number(c.id)) { %>
+          <option value="<%= c.id %>" selected>
+            <%= c.category_name %>
+          </option>
+          <% } else { %>
+          <option value="<%= c.id %>"><%= c.category_name %></option>
+          <% } %>
+
+          <% }); %>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-group-row">
+      <label for="supplier_id">
+        <select name="supplier_id" id="supplier_id" class="form-control">
+          <option value="">All Suppliers</option>
+          <% suppliers.forEach((s) => { %>
+
+          <% if (Number(selectedFilters.supplier_id) === Number(s.id)) { %>
+          <option value="<%= s.id %>" selected>
+            <%= s.supplier_name %>
+          </option>
+          <% } else { %>
+          <option value="<%= s.id %>"><%= s.supplier_name %></option>
+          <% } %>
+
+          <% }); %>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-group-row">
+      <div class="input-checkbox">
+        <% if (selectedFilters.include_deleted) { %>
+        <input
+          type="checkbox"
+          name="include_deleted"
+          id="include_deleted"
+          value="true"
+          checked="checked"
+        />
+        <% } else { %>
+        <input
+          type="checkbox"
+          name="include_deleted"
+          id="include_deleted"
+          value="true"
+        />
+        <% } %>
+        <span class="checkmark"></span>
+        <label for="include_deleted">Include Deleted</label>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-outline">Apply Filters</button>
+      <a href="/products" class="btn">Reset</a>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-id">
+            <a
+              href="<%= getSortUrl('id') %>"
+              class="sort-link <%= currentSort === 'id' ? 'active' : '' %>"
+              >ID<span class="sort-icon"
+                ><%= currentSort === 'id' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('brand') %>"
+              class="sort-link <%= currentSort === 'brand' ? 'active' : '' %>"
+              >Brand<span class="sort-icon"
+                ><%= currentSort === 'brand' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('category') %>"
+              class="sort-link <%= currentSort === 'category' ? 'active' : '' %>"
+              >Category<span class="sort-icon"
+                ><%= currentSort === 'category' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('name') %>"
+              class="sort-link <%= currentSort === 'name' ? 'active' : '' %>"
+              >Name<span class="sort-icon"
+                ><%= currentSort === 'name' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('supplier') %>"
+              class="sort-link <%= currentSort === 'supplier' ? 'active' : '' %>"
+              >Supplier<span class="sort-icon"
+                ><%= currentSort === 'supplier' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('created') %>"
+              class="sort-link <%= currentSort === 'created' ? 'active' : '' %>"
+              >Created<span class="sort-icon"
+                ><%= currentSort === 'created' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="text-left">
+            <a
+              href="<%= getSortUrl('deleted') %>"
+              class="sort-link <%= currentSort === 'deleted' ? 'active' : '' %>"
+              >Deleted<span class="sort-icon"
+                ><%= currentSort === 'deleted' ? (currentOrder === 'asc' ? '▲' :
+                '▼'): '↕' %></span
+              >
+            </a>
+          </th>
+
+          <th class="col-actions">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (products && products.length > 0) { %> <%
+        products.forEach((product) => { %>
+        <tr title="<%- product.product_description %>">
+          <td class="col-id">
+            <a href="/products/<%= product.id %>" class="table-link"
+              ><%= product.id %></a
+            >
+          </td>
+
+          <td class="text-left"><%= product.brand_name %></td>
+
+          <td class="text-left"><%= product.category_name %></td>
+
+          <td class="text-left"><%= product.product_name %></td>
+
+          <td class="text-left"><%= product.supplier_name %></td>
+
+          <td class="text-left">
+            <time
+              datetime="<%= product.created_at__formatted %>"
+              title="<%= product.created_at %>"
+              ><%= product.created_at__formatted %></time
+            >
+          </td>
+
+          <td class="text-left">
+            <time
+              datetime="<%= product.deleted_at__formatted %>"
+              title="<%= product.deleted_at %>"
+              ><%= product.deleted_at__formatted %></time
+            >
+          </td>
+
+          <td class="col-actions">
+            <div class="actions-group">
+              <a
+                href="/products/<%= product.id %>/edit"
+                class="btn btn-sm btn-outline"
+                >Edit</a
+              >
+
+              <% if (product.deleted_at === null) { %>
+              <form
+                action="/products/<%= product.id %>/delete"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-action-danger">
+                  Delete
+                </button>
+              </form>
+              <%}%>
+
+              <% if (product.deleted_at !== null) { %>
+              <form
+                action="/products/<%= product.id %>/restore"
+                method="post"
+                class="inline-form"
+              >
+                <button type="submit" class="btn btn-sm btn-outline">
+                  Restore
+                </button>
+              </form>
+              <%}%>
+            </div>
+          </td>
+        </tr>
+        <% }); %>
+        <% } else { %>
+        <tr>
+          <td colspan="8" class="text-center empty-state">
+            No products found.
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const checkDiv = document.querySelector(".input-checkbox");
+  const checkmark = document.querySelector("#include_deleted");
+  const inputCheckbox = document.querySelector("#include_deleted");
+  checkDiv.addEventListener("click", () => {
+    inputCheckbox.checked = !inputCheckbox.checked;
+    console.log(inputCheckbox.checked);
+  });
+</script>

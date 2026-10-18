@@ -113,6 +113,10 @@
   --border-radius: 1rem;
   --checkbox-transition: all 0.4s;
   --header-height: 4rem;
+  --btn-sm-height: 3rem;
+  --btn-tall-height: 4rem;
+  --input-sm-height: 3rem;
+  --input-tall-height: 4rem;
   --panel-width: 20ch;
   --panel-visibility-toggle: 700px;
   --icon-dimensions: 2rem;

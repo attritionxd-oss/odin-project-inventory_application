@@ -18,17 +18,25 @@
   line-height: 1.25;
 }
 
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--color-mono-400);
+  outline-color: var(--color-blue-200);
+  outline-offset: 2px;
+}
+
 .btn-rect {
   border-radius: unset;
 }
 
 .btn-sm {
+  height: var(--btn-sm-height);
   padding: 0.375rem 0.625rem;
   font-size: calc(var(--font-size) * 0.9);
 }
 
 .btn-tall {
-  height: 4rem;
+  height: var(--btn-tall-height);
 }
 
 .btn-primary {
