@@ -1,92 +1,15 @@
-import { body, query, validationResult, matchedData } from "express-validator";
+import { matchedData } from "express-validator";
 import { parseId } from "#utils/parse-id.js";
 import { fetchProductDependencies } from "./product.helper.js";
 import productService from "#models/core/products/product.service.js";
 import { renderWithLayout } from "#utils/renderHelper.js";
 import { formatTimestamp } from "#utils/formatTimestamp.js";
 
-const emptyErr = "must not be empty";
-const lengthErr = "must be between 1 and 350 characters";
-const intErr = "must be an integer";
-
-export const validateProductFilter = [
-  query("brand_id")
-    .optional({ values: "falsy" })
-    .trim()
-    .if(query("brand_id").trim().notEmpty())
-    .isInt()
-    .withMessage(`brand_id ${intErr}`)
-    .toInt(),
-  query("supplier_id")
-    .optional({ values: "falsy" })
-    .trim()
-    .if(query("supplier_id").trim().notEmpty())
-    .isInt()
-    .withMessage(`supplier_id ${intErr}`)
-    .toInt(),
-  query("category_id")
-    .optional({ values: "falsy" })
-    .trim()
-    .if(query("category_id").trim().notEmpty())
-    .isInt()
-    .withMessage(`category_id ${intErr}`)
-    .toInt(),
-  query("include_deleted").optional().isBoolean().toBoolean(),
-  query("sort")
-    .optional()
-    .trim()
-    .if(query("sort").notEmpty())
-    .isIn(["id", "brand", "supplier", "category", "name", "created", "deleted"])
-    .withMessage("sort must be one of the allowed values")
-    .escape(),
-  query("order")
-    .optional()
-    .trim()
-    .if(query("order").notEmpty())
-    .isIn(["asc", "desc"])
-    .escape(),
-];
-
-export const validateProduct = [
-  body("product_name")
-    .trim()
-    .notEmpty()
-    .withMessage(`Product name ${emptyErr}`)
-    .if(body("product_name").trim().notEmpty())
-    .isLength({ min: 1, max: 350 })
-    .withMessage(`Product name ${lengthErr}`)
-    .escape(),
-  body("product_description")
-    .trim()
-    .if(body("product_description").trim().notEmpty())
-    .isLength({ min: 1, max: 350 })
-    .withMessage(`Product description ${lengthErr}`)
-    .escape(),
-  body("brand_id")
-    .trim()
-    .if(body("brand_id").trim().notEmpty())
-    .isInt()
-    .toInt()
-    .withMessage(`Brand ID ${intErr}`),
-  body("category_id")
-    .trim()
-    .if(body("category_id").trim().notEmpty())
-    .isInt()
-    .toInt()
-    .withMessage(`Category ID ${intErr}`),
-  body("supplier_id")
-    .trim()
-    .if(body("supplier_id").trim().notEmpty())
-    .isInt()
-    .toInt()
-    .withMessage(`Supplier ID ${intErr}`),
-];
-
 export const productController = {
   index: async (req, res, next) => {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
+      const validationErrors = req.validationErrors;
+      if (validationErrors?.length > 0) {
         req.query = {};
       }
 
@@ -249,11 +172,11 @@ export const productController = {
         includeProducts: false,
       });
 
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
+      const validationErrors = req.validationErrors;
+      if (validationErrors?.length > 0) {
         return renderWithLayout(res, "products/new", {
           title: "New Product",
-          errors: errors.array(),
+          errors: validationErrors,
           formData: req.body,
           brands,
           categories,
@@ -340,8 +263,8 @@ export const productController = {
         return next(error);
       }
 
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
+      const validationErrors = req.validationErrors;
+      if (validationErrors?.length > 0) {
         const { brands, categories, suppliers } =
           await fetchProductDependencies({ includeProducts: false });
 
@@ -351,7 +274,7 @@ export const productController = {
           brands,
           categories,
           suppliers,
-          errors: errors.array(),
+          errors: validationErrors,
         });
       }
 
