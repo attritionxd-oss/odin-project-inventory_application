@@ -283,6 +283,11 @@
   pointer-events: none;
 }
 
+.card-form textarea {
+  padding: var(--standard-gap);
+  font-family: var(--font-family-sans);
+}
+
 .form-errors {
   display: flex;
   flex-direction: column;
