@@ -1,5 +1,86 @@
 <% if (isAuthenticated) { %>
-<h1><%= title %></h1>
-<p>Welcome to the dashboard</p>
-<p>#todo: add dashboard items</p>
+<div class="card-container dashboard__card-container">
+  <div class="card-header">
+    <h1 class="card-title"><%= title %></h1>
+  </div>
+  <div class="dashboard__card-contents">
+    <ul class="dashboard__card-main-items">
+      <li class="dashboard__card-main-item dashboard__card-main-item-products">
+        <a href="/products">
+          <h2>Total Products</h2>
+          <p><%= data?.products?.length %></p>
+        </a>
+      </li>
+
+      <li class="dashboard__card-main-item dashboard__card-main-item-brands">
+        <a href="/brands">
+          <h2>Brands</h2>
+          <p><%= data?.brands?.length %></p>
+        </a>
+      </li>
+
+      <li
+        class="dashboard__card-main-item dashboard__card-main-item-categories"
+      >
+        <a href="/categories">
+          <h2>Categories</h2>
+          <p><%= data?.categories?.length %></p>
+        </a>
+      </li>
+
+      <li class="dashboard__card-main-item dashboard__card-main-item-suppliers">
+        <a href="/suppliers">
+          <h2>Suppliers</h2>
+          <p><%= data?.suppliers?.length %></p>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="dashboard__card-secondary-items">
+      <li class="dashboard__card-secondary-item">
+        <a href="/products?sort=created&order=desc">
+          <h2>Most recent products</h2>
+          <ul>
+            <% data.mostRecentProds.forEach(product => { %>
+            <li><%= product %></li>
+            <% }) %>
+          </ul>
+        </a>
+      </li>
+
+      <li class="dashboard__card-secondary-item">
+        <a href="/brands">
+          <h2>Top brands</h2>
+          <ul>
+            <% data.topBrands.forEach(brand => { %>
+            <li><%= `${brand.name} (${brand.count})` %></li>
+            <% }) %>
+          </ul>
+        </a>
+      </li>
+
+      <li class="dashboard__card-secondary-item">
+        <a href="/categories">
+          <h2>Top categories</h2>
+          <ul>
+            <% data.topCategories.forEach(cat => { %>
+            <li><%= `${cat.name} (${cat.count})` %></li>
+            <% }) %>
+          </ul>
+        </a>
+      </li>
+
+      <li class="dashboard__card-secondary-item">
+        <a href="/suppliers">
+          <h2>Top suppliers</h2>
+          <ul>
+            <% data.topSuppliers.forEach(sup => { %>
+            <li><%= `${sup.name} (${sup.count})` %></li>
+            <% }) %>
+          </ul>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
 <% } %>

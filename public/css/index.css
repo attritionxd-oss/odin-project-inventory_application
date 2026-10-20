@@ -4,6 +4,7 @@
 @import url("/css/partials/login.css");
 @import url("/css/modules/module.index.css");
 @import url("/css/modules/module.button.css");
+@import url("/css/modules/module.dashboard.css");
 
 * {
   box-sizing: border-box;

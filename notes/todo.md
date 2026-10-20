@@ -43,8 +43,8 @@
     #routes 
     #controller
     #views 
-  #dashboard
-    #views - show indicator for record count from each module
+  #dashboard {cm:2026-10-20}
+    #views - show indicator for record count from each module {cm:2026-10-20}
 
 (A) {2026-10-17} create reusable validation middleware on #categories {cm:2026-10-18}
   create `src/middleware/validate.js` {cm:2026-10-18}
