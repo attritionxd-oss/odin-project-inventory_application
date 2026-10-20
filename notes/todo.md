@@ -5,16 +5,17 @@
   add service layer models {cm:2026-10-09}
 
 (A) {2026-10-05} #mock_user : create mock user with mock password (stored in `.env`)
+  finalize user role configurations, use stronger passwords
 
-(A) {2026-10-05} #routes : also domain-driven / feature-based structure. Some routes may be shared, such as, when a single route applies operations to multiple db tables
-  create routers
-  create controllers
+(A) {2026-10-05} #routes : also domain-driven / feature-based structure. Some routes may be shared, such as, when a single route applies operations to multiple db tables {cm:2026-10-20}
+  create routers {cm:2026-10-20}
+  create controllers {cm:2026-10-20}
 
 (A) {2026-10-05} #views : views follow #EJS_layout_wrapper_functions {cm:2026-10-13}
   create main layout: `src/views/layouts/main.ejs` {cm:2026-10-13}
   create helper render wrapper: `src/utils/render-helper.ejs` {cm:2026-10-13}
 
-(A) {2026-10-09} #modules
+(A) {2026-10-09} #modules {cm:2026-10-20}
   #db : clean up db {cm:2026-10-13}
   #suppliers {cm:2026-10-13}
     #views : apply styles to @new.ejs {cm:2026-10-13}
@@ -31,18 +32,6 @@
     #routes {cm:2026-10-18}
     #controller {cm:2026-10-18}
     #views {cm:2026-10-18}
-  #product_variations
-    #routes 
-    #controller
-    #views 
-  #line_items
-    #routes 
-    #controller
-    #views 
-  #stock_movements
-    #routes 
-    #controller
-    #views 
   #dashboard {cm:2026-10-20}
     #views - show indicator for record count from each module {cm:2026-10-20}
 
