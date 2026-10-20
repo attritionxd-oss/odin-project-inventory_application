@@ -33,6 +33,7 @@ export const requireRole = (...allowedRoles) => {
         error.statusCode = 403;
         return next(error);
 
+        // for raw EJS template rendering
         // return res.status(403).render("errors/403", {
         //   title: "Access denied",
         //   message: `Your role (${req.user.role}) does not have permission to access this resource`,
