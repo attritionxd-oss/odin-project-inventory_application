@@ -45,6 +45,7 @@
   review role-based UI details {cm:2026-10-20}
     if required: use `res.locals.currentUser.isAuthorized` instead of controller-defined `isRoleAuthorized` variables {cm:2026-10-20}
     if not: remove all instances of `isRoleAuthorized` {cm:2026-10-20}
+  use validation middlware on `brand` and `supplier` modules {cm:2026-10-20}
   review validations and escapes are in place
   encode dummy data into db seed
   use stronger passwords
