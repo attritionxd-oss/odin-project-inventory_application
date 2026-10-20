@@ -1,4 +1,5 @@
 import { userService } from "#modules/users/user.service.js";
+import { matchedData } from "express-validator";
 
 export const authController = {
   showLoginForm(req, res) {
@@ -26,12 +27,17 @@ export const authController = {
 
   async login(req, res, next) {
     try {
-      const { email, password, redirectTo } = req.body;
-      const targetRedirect = redirectTo || "/";
+      const validationErrors = req.validationErrors;
 
-      if (!email || !password) {
+      const { email, redirectTo } = matchedData(req);
+
+      const targetRedirect = redirectTo || "/";
+      const { password } = req.body;
+
+      if (validationErrors?.length > 0) {
+        const firstError = validationErrors[0].msg;
         return res.redirect(
-          `/login?error=${encodeURIComponent("Email and password are required")}&redirectTo${encodeURIComponent(targetRedirect)}`,
+          `/login?error=${encodeURIComponent(firstError)}&redirectTo${encodeURIComponent(targetRedirect)}`,
         );
       }
 
