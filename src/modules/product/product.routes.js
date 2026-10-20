@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { requireRole } from "#middleware/authorize.js";
 import { validate } from "#middleware/validate.js";
-import { productController } from "./product.controller.js";
 import {
   validateProductFilter,
   validateProduct,
 } from "./product.validation.js";
+import { productController } from "./product.controller.js";
 
 const router = Router();
 

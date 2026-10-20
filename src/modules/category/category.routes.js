@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { validate } from "#middleware/validate.js";
 import { requireRole } from "#middleware/authorize.js";
-import categoryController from "./category.controller.js";
+import { validate } from "#middleware/validate.js";
 import { validateCategory } from "./category.validation.js";
+import categoryController from "./category.controller.js";
 
 const router = Router();
 
