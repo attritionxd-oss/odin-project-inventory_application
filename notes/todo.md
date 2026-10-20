@@ -4,8 +4,7 @@
   create schema seeding utility {cm:2026-10-09}
   add service layer models {cm:2026-10-09}
 
-(A) {2026-10-05} #mock_user : create mock user with mock password (stored in `.env`)
-  finalize user role configurations, use stronger passwords
+(A) {2026-10-05} #mock_user : create mock user with mock password (stored in `.env`) {cm:2026-10-20}
 
 (A) {2026-10-05} #routes : also domain-driven / feature-based structure. Some routes may be shared, such as, when a single route applies operations to multiple db tables {cm:2026-10-20}
   create routers {cm:2026-10-20}
@@ -40,3 +39,13 @@
   create `src/modules/categories/category.validation.js` {cm:2026-10-18}
   integrate middleware into `category.routes.js` (adds `validationErrors` into `req`) {cm:2026-10-18}
   use `req.validationErrors` in `category.controller.js` {cm:2026-10-18}
+
+(A) {2026-10-20} pre-deploy checklist
+  finalize user role configurations {cm:2026-10-20}
+  review role-based UI details {cm:2026-10-20}
+    if required: use `res.locals.currentUser.isAuthorized` instead of controller-defined `isRoleAuthorized` variables {cm:2026-10-20}
+    if not: remove all instances of `isRoleAuthorized` {cm:2026-10-20}
+  review validations and escapes are in place
+  encode dummy data into db seed
+  use stronger passwords
+  add README.md

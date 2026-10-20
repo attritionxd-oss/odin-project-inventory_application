@@ -6,10 +6,6 @@ import { parseId } from "#utils/parse-id.js";
 const categoryController = {
   index: async (req, res, next) => {
     try {
-      const isRoleAuthorized =
-        res.locals?.currentUser.role === "ADMIN" ||
-        res.locals?.currentUser.role === "ANALYST";
-
       const allowedSortFields = {
         id: "id",
         name: "category_name",
@@ -55,7 +51,6 @@ const categoryController = {
         currentSort,
         currentOrder: isOrderAscBool ? "asc" : "desc",
         getSortUrl,
-        isRoleAuthorized,
       });
     } catch (error) {
       next(error);

@@ -20,10 +20,6 @@ const validateBrand = [
 const brandController = {
   index: async (req, res, next) => {
     try {
-      const isRoleAuthorized =
-        res.locals?.currentUser.role === "ADMIN" ||
-        res.locals?.currentUser.role === "ANALYST";
-
       const allowedSortFields = {
         id: "id",
         name: "brand_name",
@@ -66,7 +62,6 @@ const brandController = {
         currentSort,
         currentOrder: isOrderAscBool ? "asc" : "desc",
         getSortUrl,
-        isRoleAuthorized,
       });
     } catch (error) {
       next(error);

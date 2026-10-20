@@ -8,15 +8,11 @@ const router = Router();
 
 router.get("/", categoryController.index);
 
-router.get(
-  "/new",
-  requireRole("SPECIALIST", "ADMIN"),
-  categoryController.newForm,
-);
+router.get("/new", categoryController.newForm);
 
 router.post(
   "/",
-  requireRole("SPECIALIST", "ADMIN"),
+  requireRole("ENCODER", "ADMIN"),
   validate(validateCategory),
   categoryController.create,
 );

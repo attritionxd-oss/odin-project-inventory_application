@@ -13,10 +13,6 @@ export const productController = {
         req.query = {};
       }
 
-      const isRoleAuthorized =
-        res.locals?.currentUser.role === "ADMIN" ||
-        res.locals?.currentUser.role === "ANALYST";
-
       const {
         brand_id,
         supplier_id,
@@ -98,7 +94,6 @@ export const productController = {
         currentSort,
         currentOrder: isOrderAscBool ? "asc" : "desc",
         getSortUrl,
-        isRoleAuthorized,
       });
     } catch (error) {
       next(error);

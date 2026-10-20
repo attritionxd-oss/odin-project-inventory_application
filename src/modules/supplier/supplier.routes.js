@@ -6,21 +6,13 @@ const router = Router();
 
 router.get("/", supplierController.index);
 
-router.get(
-  "/new",
-  requireRole("SPECIALIST", "ADMIN"),
-  supplierController.newForm,
-);
+router.get("/new", supplierController.newForm);
 
 router.post("/", requireRole("SPECIALIST", "ADMIN"), supplierController.create);
 
 router.get(/^\/(\d+)$/, supplierController.show);
 
-router.get(
-  /^\/(\d+)\/edit$/,
-  requireRole("SPECIALIST", "ADMIN"),
-  supplierController.editForm,
-);
+router.get(/^\/(\d+)\/edit$/, supplierController.editForm);
 
 router.post(
   /^\/(\d+)$/,

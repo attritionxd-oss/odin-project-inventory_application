@@ -27,10 +27,6 @@ const validateSupplier = [
 const supplierController = {
   index: async (req, res, next) => {
     try {
-      const isRoleAuthorized =
-        res.locals?.currentUser.role === "ADMIN" ||
-        res.locals?.currentUser.role === "ANALYST";
-
       const allowedSortFields = {
         id: "id",
         name: "supplier_name",
@@ -74,7 +70,6 @@ const supplierController = {
         currentSort,
         currentOrder: isOrderAscBool ? "asc" : "desc",
         getSortUrl,
-        isRoleAuthorized,
       });
     } catch (error) {
       next(error);

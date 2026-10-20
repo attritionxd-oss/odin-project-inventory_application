@@ -11,27 +11,18 @@ const router = Router();
 
 router.get("/", validateProductFilter, productController.index);
 
-router.get(
-  "/new",
-  requireRole("SPECIALIST", "ADMIN"),
-  validate(validateProductFilter),
-  productController.newForm,
-);
+router.get("/new", validate(validateProductFilter), productController.newForm);
 
 router.post(
   "/",
-  requireRole("SPECIALIST", "ADMIN"),
+  requireRole("ENCODER", "ADMIN"),
   validate(validateProduct),
   productController.create,
 );
 
 router.get(/^\/(\d+)$/, productController.show);
 
-router.get(
-  /^\/(\d+)\/edit$/,
-  requireRole("SPECIALIST", "ADMIN"),
-  productController.editForm,
-);
+router.get(/^\/(\d+)\/edit$/, productController.editForm);
 
 router.post(
   /^\/(\d+)$/,
