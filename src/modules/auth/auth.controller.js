@@ -31,7 +31,12 @@ export const authController = {
 
       const { email, redirectTo } = matchedData(req);
 
-      const targetRedirect = redirectTo || "/";
+      let targetRedirect = redirectTo || "/";
+
+      if (!targetRedirect.startsWith("/") || targetRedirect.startsWith("//")) {
+        targetRedirect = "/";
+      }
+
       const { password } = req.body;
 
       if (validationErrors?.length > 0) {

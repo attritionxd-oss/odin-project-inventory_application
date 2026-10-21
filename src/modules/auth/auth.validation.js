@@ -9,5 +9,5 @@ export const validateLogin = [
     .withMessage("Please enter a valid email address.")
     .normalizeEmail(),
   body("password").notEmpty().withMessage("Password is required."),
-  body("redirectTo").optional().trim().escape(),
+  body("redirectTo").optional().trim(),
 ];
