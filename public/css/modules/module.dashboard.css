@@ -44,10 +44,11 @@
 
 .dashboard__card-main-item {
   aspect-ratio: 2.5;
+  height: 100%;
 }
 
 .dashboard__card-secondary-item {
-  aspect-ratio: 2.3;
+  height: 100%;
 }
 
 .dashboard__card-main-item:hover,
