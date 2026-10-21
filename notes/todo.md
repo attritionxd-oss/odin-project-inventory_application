@@ -50,5 +50,5 @@
   db-seeding {cm:2026-10-21}
     encode existing data into db seed script {cm:2026-10-21}
     truncate tables then run `db.seed.js` {cm:2026-10-21}
-  replace dev passwords with prod-ready passwords
-  add README.md
+  replace dev passwords with prod-ready passwords {cm:2026-10-21}
+  add README.md {cm:2026-10-21}
