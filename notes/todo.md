@@ -47,6 +47,8 @@
     if not: remove all instances of `isRoleAuthorized` {cm:2026-10-20}
   use validation middlware on `brand` and `supplier` modules {cm:2026-10-20}
   review validations and escapes are in place {cm:2026-10-20}
-  encode dummy data into db seed
-  use stronger passwords
+  db-seeding {cm:2026-10-21}
+    encode existing data into db seed script {cm:2026-10-21}
+    truncate tables then run `db.seed.js` {cm:2026-10-21}
+  replace dev passwords with prod-ready passwords
   add README.md
