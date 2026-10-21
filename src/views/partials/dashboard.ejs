@@ -6,30 +6,46 @@
   <div class="dashboard__card-contents">
     <ul class="dashboard__card-main-items">
       <li class="dashboard__card-main-item dashboard__card-main-item-products">
-        <a href="/products">
+        <a
+          href="/products"
+          title="Total number of unique products"
+          aria-label="Total number of unique products"
+        >
           <h2>Total Products</h2>
           <p><%= data?.products?.length %></p>
-        </a>
-      </li>
-
-      <li class="dashboard__card-main-item dashboard__card-main-item-brands">
-        <a href="/brands">
-          <h2>Brands</h2>
-          <p><%= data?.brands?.length %></p>
         </a>
       </li>
 
       <li
         class="dashboard__card-main-item dashboard__card-main-item-categories"
       >
-        <a href="/categories">
+        <a
+          href="/categories"
+          title="Total number of unique product categories"
+          aria-label="Total number of unique product categories"
+        >
           <h2>Categories</h2>
           <p><%= data?.categories?.length %></p>
         </a>
       </li>
 
+      <li class="dashboard__card-main-item dashboard__card-main-item-brands">
+        <a
+          href="/brands"
+          title="Total number of unique brands"
+          aria-label="Total number of unique brands"
+        >
+          <h2>Brands</h2>
+          <p><%= data?.brands?.length %></p>
+        </a>
+      </li>
+
       <li class="dashboard__card-main-item dashboard__card-main-item-suppliers">
-        <a href="/suppliers">
+        <a
+          href="/suppliers"
+          title="Total number of unique suppliers"
+          aria-label="Total number of unique suppliers"
+        >
           <h2>Suppliers</h2>
           <p><%= data?.suppliers?.length %></p>
         </a>
@@ -38,7 +54,11 @@
 
     <ul class="dashboard__card-secondary-items">
       <li class="dashboard__card-secondary-item">
-        <a href="/products?sort=created&order=desc">
+        <a
+          href="/products?sort=created&order=desc"
+          title="Most recently added products"
+          aria-label="Most recently added products"
+        >
           <h2>Most recent products</h2>
           <ul>
             <% data.mostRecentProds.forEach(product => { %>
@@ -49,18 +69,11 @@
       </li>
 
       <li class="dashboard__card-secondary-item">
-        <a href="/brands">
-          <h2>Top brands</h2>
-          <ul>
-            <% data.topBrands.forEach(brand => { %>
-            <li><%= `${brand.name} (${brand.count})` %></li>
-            <% }) %>
-          </ul>
-        </a>
-      </li>
-
-      <li class="dashboard__card-secondary-item">
-        <a href="/categories">
+        <a
+          href="/categories"
+          title="Top categories with most number of products"
+          aria-label="Top categories with most number of products"
+        >
           <h2>Top categories</h2>
           <ul>
             <% data.topCategories.forEach(cat => { %>
@@ -71,7 +84,26 @@
       </li>
 
       <li class="dashboard__card-secondary-item">
-        <a href="/suppliers">
+        <a
+          href="/brands"
+          title="Brands with most number of products"
+          aria-label="Brands with most number of products"
+        >
+          <h2>Top brands</h2>
+          <ul>
+            <% data.topBrands.forEach(brand => { %>
+            <li><%= `${brand.name} (${brand.count})` %></li>
+            <% }) %>
+          </ul>
+        </a>
+      </li>
+
+      <li class="dashboard__card-secondary-item">
+        <a
+          href="/suppliers"
+          title="Suppliers with most number of products"
+          aria-label="Suppliers with most number of products"
+        >
           <h2>Top suppliers</h2>
           <ul>
             <% data.topSuppliers.forEach(sup => { %>
