@@ -17,7 +17,7 @@ projects:
               - key: NODE_ENV
                 sync: false
             region: virginia
-            buildCommand: npm install && npm run seed-schema && npm run seed db
+            buildCommand: npm install && npm run db:schema && npm run db:seed
             startCommand: npm start
             autoDeployTrigger: "off"
             buildFilter:
