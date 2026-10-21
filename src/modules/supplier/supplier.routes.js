@@ -12,7 +12,7 @@ router.get("/new", supplierController.newForm);
 
 router.post(
   "/",
-  requireRole("SPECIALIST", "ADMIN"),
+  requireRole("ENCODER", "ADMIN"),
   validate(validateSupplier),
   supplierController.create,
 );
